@@ -16,7 +16,7 @@ for f in inf:
 if not rec.has_key("Country"):
     rec["Country"]="Unknown"
     
-keys = ['Name','Lat','Long','Height','Normals']
+keys = ['Number','Name','Normals','Lat','Long','Height',]
 
 if not reduce(lambda x, y: rec.has_key(y) and x,keys,True):
     mf = reduce(lambda x, y: x if rec.has_key(y) else ([y]+x) ,keys, [])
@@ -33,5 +33,6 @@ if reduce(lambda x, y: y=='-99.0' and x,ns,True):
     print >> sys.stderr, "%s: Skipping due to missing normals" % sys.argv[1]
     sys.exit(1)
 
-print '"%s","%s",%s' % (rec["Name"],rec["Country"],string.join([rec[x] for x in keys[1:-1]] + ns,","))
+print '"%s","%s","%s",%s' % (rec["Number"],rec["Name"],rec["Country"],
+                        string.join([rec[x] for x in keys[3:]] + ns,","))
 
