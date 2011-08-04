@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     26139,        540]
-NotebookOptionsPosition[     25315,        509]
-NotebookOutlinePosition[     25673,        525]
-CellTagsIndexPosition[     25630,        522]
+NotebookDataLength[     26712,        552]
+NotebookOptionsPosition[     25849,        520]
+NotebookOutlinePosition[     26207,        536]
+CellTagsIndexPosition[     26164,        533]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -137,12 +137,15 @@ Cell[BoxData[
 Cell[BoxData[
  RowBox[{
   RowBox[{"countries", " ", "=", " ", 
-   RowBox[{"Union", "[", 
-    RowBox[{"xdata", "[", 
-     RowBox[{"[", 
-      RowBox[{"All", ",", "3"}], "]"}], "]"}], "]"}]}], ";"}]], "Input",
+   RowBox[{"Sort", "[", 
+    RowBox[{"Union", "[", 
+     RowBox[{"xdata", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "3"}], "]"}], "]"}], "]"}], "]"}]}], 
+  ";"}]], "Input",
  CellChangeTimes->{{3.521424164873083*^9, 3.5214241794199142`*^9}, {
-  3.521426304754714*^9, 3.521426310539132*^9}}],
+  3.521426304754714*^9, 3.521426310539132*^9}, {3.521472380504331*^9, 
+  3.521472382048921*^9}}],
 
 Cell[CellGroupData[{
 
@@ -272,9 +275,10 @@ Cell[BoxData[
         "\[IndentingNewLine]", 
         RowBox[{"{", 
          RowBox[{"from", ",", 
-          RowBox[{"cstations", "[", 
-           RowBox[{"[", 
-            RowBox[{"All", ",", "2"}], "]"}], "]"}]}], "}"}]}], 
+          RowBox[{"Sort", "[", 
+           RowBox[{"cstations", "[", 
+            RowBox[{"[", 
+             RowBox[{"All", ",", "2"}], "]"}], "]"}], "]"}]}], "}"}]}], 
        "\[IndentingNewLine]", "]"}]}], "]"}], ",", 
     RowBox[{"{", 
      RowBox[{"country", ",", "countries"}], "}"}]}], "]"}], 
@@ -309,13 +313,15 @@ Cell[BoxData[
    3.5214690409468412`*^9, 3.5214691097846937`*^9}, {3.521469143211281*^9, 
    3.521469196106104*^9}, {3.521469228131336*^9, 3.52146925294195*^9}, {
    3.5214693735349073`*^9, 3.521469404903006*^9}, {3.521469446511922*^9, 
-   3.521469446792433*^9}}],
+   3.521469446792433*^9}, {3.521472419176366*^9, 3.521472451370171*^9}, {
+   3.521472574845048*^9, 3.5214725773884*^9}, {3.521472609914331*^9, 
+   3.521472615940332*^9}, {3.52147265727816*^9, 3.521472674780758*^9}}],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`country$$ = "UKRAINE", Typeset`show$$ = 
-    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+   DynamicModuleBox[{$CellContext`country$$ = "USA---------", Typeset`show$$ =
+     True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`country$$], {
@@ -380,13 +386,13 @@ Cell[BoxData[
        "VANUATU", "VENEZUALA", "VENEZUELA", "VIETNAM", "WALLIS ISLAND", 
        "WASH", "WESTERN SAHAR", "W.GER ANY", "W.GERMANY", "YAN-OLGIY", 
        "YEMEN", "YUGOS AVIA", "YUGOSLAVIA", "ZAIRE", "ZAMBI", "ZAMBIA", 
-       "ZIMBABWE", "ZIMBA WE"}}}, Typeset`size$$ = {886., {982., 988.}}, 
+       "ZIMBABWE", "ZIMBA WE"}}}, Typeset`size$$ = {886., {944., 950.}}, 
     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    True, $CellContext`country$59919$$ = 0}, 
+    True, $CellContext`country$66081$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`country$$ = "AATAR"}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`country$$, $CellContext`country$59919$$, 0]}, 
+        Hold[$CellContext`country$$, $CellContext`country$66081$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -424,7 +430,8 @@ $CellContext`maxdist = Max[$CellContext`dst], $CellContext`fp =
                    Part[$CellContext`dc, All, 1, 
                     Span[2, 3]]]}]], {$CellContext`distance, 
                0, $CellContext`maxdist/10}]]]], {$CellContext`from, 
-          Part[$CellContext`cstations, All, 2]}]], 
+          Sort[
+           Part[$CellContext`cstations, All, 2]]}]], 
       "Specifications" :> {{$CellContext`country$$, {
          "AATAR", "ACORES", "AFGHA", "AFGHANISTAN", "ALASKA", "ALBANIA", 
           "ALGERIA", "ALGERIA-----", "ALKER FLD", "ANDAMAN AND L", "ANGOL", 
@@ -490,7 +497,7 @@ $CellContext`maxdist = Max[$CellContext`dst], $CellContext`fp =
           "W.GERMANY", "YAN-OLGIY", "YEMEN", "YUGOS AVIA", "YUGOSLAVIA", 
           "ZAIRE", "ZAMBI", "ZAMBIA", "ZIMBABWE", "ZIMBA WE"}}}, 
       "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{929., {1024., 1030.}},
+     ImageSizeCache->{929., {986., 992.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -501,8 +508,12 @@ $CellContext`maxdist = Max[$CellContext`dst], $CellContext`fp =
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
  CellChangeTimes->{{3.5214692020126467`*^9, 3.521469253626491*^9}, 
-   3.521469405968039*^9, 3.521469448088766*^9}]
+   3.521469405968039*^9, 3.521469448088766*^9, 3.5214724525408173`*^9, 
+   3.5214725784058933`*^9, 3.5214726308820047`*^9, 3.521472676356646*^9}]
 }, Open  ]],
+
+Cell[BoxData[" "], "Input",
+ CellChangeTimes->{{3.521472843418083*^9, 3.521472846634719*^9}}],
 
 Cell[BoxData[""], "Input",
  CellChangeTimes->{{3.521424702979507*^9, 3.521424705494772*^9}}]
@@ -536,12 +547,13 @@ Cell[2717, 77, 964, 26, 27, "Input"],
 Cell[3684, 105, 261, 7, 27, "Input"],
 Cell[3948, 114, 260, 7, 27, "Input"],
 Cell[4211, 123, 464, 11, 27, "Input"],
-Cell[4678, 136, 324, 8, 27, "Input"],
+Cell[4678, 136, 412, 11, 27, "Input"],
 Cell[CellGroupData[{
-Cell[5027, 148, 7817, 163, 388, "Input"],
-Cell[12847, 313, 12357, 190, 2071, "Output"]
+Cell[5115, 151, 8048, 166, 388, "Input"],
+Cell[13166, 319, 12476, 192, 1995, "Output"]
 }, Open  ]],
-Cell[25219, 506, 92, 1, 27, "Input"]
+Cell[25657, 514, 93, 1, 27, "Input"],
+Cell[25753, 517, 92, 1, 27, "Input"]
 }
 ]
 *)
