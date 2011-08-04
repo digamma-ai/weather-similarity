@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     21601,        448]
-NotebookOptionsPosition[     20742,        416]
-NotebookOutlinePosition[     21099,        432]
-CellTagsIndexPosition[     21056,        429]
+NotebookDataLength[     25381,        519]
+NotebookOptionsPosition[     24559,        488]
+NotebookOutlinePosition[     24916,        504]
+CellTagsIndexPosition[     24873,        501]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -61,7 +61,8 @@ Cell[BoxData[
    ",", "\<\"Oct\"\>", ",", "\<\"Nov\"\>", ",", "\<\"Dec\"\>"}], 
   "}"}]], "Output",
  CellChangeTimes->{{3.521421225549981*^9, 3.521421230124789*^9}, 
-   3.521421354739725*^9, 3.5214214069229097`*^9, 3.521425515293713*^9}]
+   3.521421354739725*^9, 3.5214214069229097`*^9, 3.521425515293713*^9, 
+   3.521426759389145*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -135,22 +136,6 @@ Cell[BoxData[
 
 Cell[BoxData[
  RowBox[{
-  RowBox[{"wg", "=", 
-   RowBox[{"WorldGraphics", "[", 
-    RowBox[{"Join", "[", 
-     RowBox[{
-      RowBox[{"{", "Red", "}"}], ",", "coords"}], "]"}], "]"}]}], 
-  ";"}]], "Input",
- CellChangeTimes->{{3.5214221930444098`*^9, 3.521422209782789*^9}, {
-   3.521422241770916*^9, 3.5214222946117697`*^9}, 3.521422325845241*^9, {
-   3.521422538546485*^9, 3.5214225389568996`*^9}, {3.521422659832851*^9, 
-   3.5214226695844927`*^9}, {3.5214231173598833`*^9, 3.521423127638365*^9}, {
-   3.5214231818937397`*^9, 3.5214231850916433`*^9}, {3.521423258225471*^9, 
-   3.521423260433055*^9}, 3.521423683413979*^9, {3.521425160142672*^9, 
-   3.521425171869746*^9}, 3.5214256006421423`*^9}],
-
-Cell[BoxData[
- RowBox[{
   RowBox[{"countries", " ", "=", " ", 
    RowBox[{"Union", "[", 
     RowBox[{"xdata", "[", 
@@ -191,20 +176,78 @@ Cell[BoxData[
                "&"}]}], "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
           RowBox[{"Module", "[", 
            RowBox[{
-            RowBox[{"{", "fp", "}"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"{", " ", 
+             RowBox[{"ft", ",", "dst"}], "}"}], ",", "\[IndentingNewLine]", 
             RowBox[{
-             RowBox[{"fp", "=", 
+             RowBox[{"ft", "=", 
               RowBox[{"fromstation", "[", 
                RowBox[{"[", 
-                RowBox[{"1", ",", "4"}], "]"}], "]"}]}], ";", 
+                RowBox[{"1", ",", "5"}], "]"}], "]"}]}], ";", 
              "\[IndentingNewLine]", 
-             RowBox[{"Show", "[", 
-              RowBox[{"{", 
-               RowBox[{"wm", ",", 
-                RowBox[{"WorldGraphics", "[", 
+             RowBox[{"dst", "=", 
+              RowBox[{"Map", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{"EuclideanDistance", "[", 
+                  RowBox[{"ft", ",", "#"}], "]"}], "&"}], ",", 
+                RowBox[{"xdata", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"All", ",", "5"}], "]"}], "]"}]}], "]"}]}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"With", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"ddata", " ", "=", " ", 
+                  RowBox[{"Transpose", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"xdata", ",", "dst"}], "}"}], "]"}]}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"maxdist", "=", 
+                  RowBox[{"Max", "[", "dst", "]"}]}], ",", 
+                 "\[IndentingNewLine]", 
+                 RowBox[{"fp", "=", 
+                  RowBox[{"fromstation", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"1", ",", "4"}], "]"}], "]"}]}]}], "}"}], ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"Module", "[", 
+                  RowBox[{
+                   RowBox[{"{", 
+                    RowBox[{"dc", ",", "dp"}], "}"}], ",", 
+                   "\[IndentingNewLine]", 
+                   RowBox[{
+                    RowBox[{"dc", " ", "=", " ", 
+                    RowBox[{"Select", "[", 
+                    RowBox[{"ddata", ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "\[LessEqual]", " ", 
+                    "distance"}], " ", "&"}]}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"dp", "=", 
+                    RowBox[{"dc", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"All", ",", "1", ",", "4"}], "]"}], "]"}]}], ";", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Show", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"wm", ",", "\[IndentingNewLine]", 
+                    RowBox[{"WorldGraphics", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"Blue", ",", "dp"}], "}"}], "]"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"WorldGraphics", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"Red", ",", "fp"}], "}"}], "]"}]}], "}"}], 
+                    "]"}]}]}], "]"}], ",", "\[IndentingNewLine]", 
                  RowBox[{"{", 
-                  RowBox[{"Red", ",", "fp"}], "}"}], "]"}]}], "}"}], 
-              "]"}]}]}], "]"}]}], "\[IndentingNewLine]", "]"}], ",", 
+                  RowBox[{"distance", ",", "0", ",", "maxdist"}], "}"}]}], 
+                "\[IndentingNewLine]", "]"}]}], "]"}]}]}], 
+           "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}], ",", 
         "\[IndentingNewLine]", 
         RowBox[{"{", 
          RowBox[{"from", ",", 
@@ -229,7 +272,16 @@ Cell[BoxData[
    3.5214248720400753`*^9}, {3.5214249624572163`*^9, 3.521425035403067*^9}, {
    3.521425188362286*^9, 3.521425193590424*^9}, 3.521426313581047*^9, {
    3.5214263496485767`*^9, 3.521426384029702*^9}, {3.521426433803934*^9, 
-   3.52142648845264*^9}, {3.521426530381489*^9, 3.521426530504099*^9}}],
+   3.52142648845264*^9}, {3.521426530381489*^9, 3.521426530504099*^9}, {
+   3.521426604079699*^9, 3.521426627953556*^9}, {3.5214276411236553`*^9, 
+   3.521427641549232*^9}, {3.52142769075904*^9, 3.5214276914516497`*^9}, {
+   3.5214277625655003`*^9, 3.521427832231545*^9}, {3.5214278946057863`*^9, 
+   3.521428032157008*^9}, {3.5214280765510807`*^9, 3.521428078591732*^9}, {
+   3.521428131798497*^9, 3.5214281422801313`*^9}, {3.52142835478478*^9, 
+   3.5214283819557753`*^9}, {3.52142847080931*^9, 3.521428653930694*^9}, {
+   3.521428747654965*^9, 3.521428770385653*^9}, {3.52142882066713*^9, 
+   3.521428894349996*^9}, {3.5214289381556797`*^9, 3.521429000447735*^9}, {
+   3.521429057394978*^9, 3.521429091495261*^9}}],
 
 Cell[BoxData[
  TagBox[
@@ -300,13 +352,13 @@ Cell[BoxData[
        "VANUATU", "VENEZUALA", "VENEZUELA", "VIETNAM", "WALLIS ISLAND", 
        "WASH", "WESTERN SAHAR", "W.GER ANY", "W.GERMANY", "YAN-OLGIY", 
        "YEMEN", "YUGOS AVIA", "YUGOSLAVIA", "ZAIRE", "ZAMBI", "ZAMBIA", 
-       "ZIMBABWE", "ZIMBA WE"}}}, Typeset`size$$ = {403., {133., 139.}}, 
+       "ZIMBABWE", "ZIMBA WE"}}}, Typeset`size$$ = {446., {189., 195.}}, 
     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    True, $CellContext`country$5049$$ = 0}, 
+    True, $CellContext`country$16259$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`country$$ = "AATAR"}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`country$$, $CellContext`country$5049$$, 0]}, 
+        Hold[$CellContext`country$$, $CellContext`country$16259$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -319,11 +371,25 @@ Cell[BoxData[
          With[{$CellContext`fromstation = 
            Select[$CellContext`cstations, Part[#, 2] == $CellContext`from& ]}, 
           
-          Module[{$CellContext`fp}, $CellContext`fp = 
-            Part[$CellContext`fromstation, 1, 4]; Show[{$CellContext`wm, 
+          Module[{$CellContext`ft, $CellContext`dst}, $CellContext`ft = 
+            Part[$CellContext`fromstation, 1, 5]; $CellContext`dst = 
+            Map[EuclideanDistance[$CellContext`ft, #]& , 
+              Part[$CellContext`xdata, All, 5]]; 
+           With[{$CellContext`ddata = 
+              Transpose[{$CellContext`xdata, $CellContext`dst}], \
+$CellContext`maxdist = Max[$CellContext`dst], $CellContext`fp = 
+              Part[$CellContext`fromstation, 1, 4]}, 
+             Manipulate[
               
-              WorldPlot`WorldGraphics[{
-               Red, $CellContext`fp}]}]]], {$CellContext`from, 
+              Module[{$CellContext`dc, $CellContext`dp}, $CellContext`dc = 
+                Select[$CellContext`ddata, 
+                  Part[#, 2] <= $CellContext`distance& ]; $CellContext`dp = 
+                Part[$CellContext`dc, All, 1, 4]; Show[{$CellContext`wm, 
+                  WorldPlot`WorldGraphics[{Blue, $CellContext`dp}], 
+                  
+                  WorldPlot`WorldGraphics[{
+                   Red, $CellContext`fp}]}]], {$CellContext`distance, 
+               0, $CellContext`maxdist}]]]], {$CellContext`from, 
           Part[$CellContext`cstations, All, 2]}]], 
       "Specifications" :> {{$CellContext`country$$, {
          "AATAR", "ACORES", "AFGHA", "AFGHANISTAN", "ALASKA", "ALBANIA", 
@@ -390,7 +456,7 @@ Cell[BoxData[
           "W.GERMANY", "YAN-OLGIY", "YEMEN", "YUGOS AVIA", "YUGOSLAVIA", 
           "ZAIRE", "ZAMBI", "ZAMBIA", "ZIMBABWE", "ZIMBA WE"}}}, 
       "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{446., {175., 181.}},
+     ImageSizeCache->{489., {231., 237.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -408,14 +474,20 @@ Cell[BoxData[
    3.5214248126942577`*^9, 3.5214248434018297`*^9, 3.521424875630777*^9, {
    3.521424972579227*^9, 3.5214249798181868`*^9}, 3.521425011533249*^9, 
    3.5214250434454107`*^9, 3.521425536236828*^9, 3.5214263199500027`*^9, 
-   3.521426369415571*^9, 3.521426491648774*^9, 3.521426532353368*^9}]
+   3.521426369415571*^9, 3.521426491648774*^9, 3.521426532353368*^9, 
+   3.521426760275638*^9, {3.521427812192183*^9, 3.521427832745987*^9}, 
+   3.521428034669098*^9, 3.521428082429345*^9, 3.52142814429468*^9, 
+   3.521428385803071*^9, 3.521428587731938*^9, 3.521428626198412*^9, 
+   3.5214286583254147`*^9, 3.5214287718815823`*^9, 3.52142882350065*^9, 
+   3.521428897829978*^9, 3.5214289556602182`*^9, 3.5214290016854677`*^9, 
+   3.521429093628286*^9}]
 }, Open  ]],
 
 Cell[BoxData[""], "Input",
  CellChangeTimes->{{3.521424702979507*^9, 3.521424705494772*^9}}]
 },
 WindowSize->{740, 842},
-WindowMargins->{{46, Automatic}, {Automatic, 21}},
+WindowMargins->{{104, Automatic}, {Automatic, 0}},
 FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
 2011)",
 StyleDefinitions->"Default.nb"
@@ -436,20 +508,19 @@ Cell[685, 24, 589, 13, 27, "Input"],
 Cell[1277, 39, 176, 4, 27, "Input"],
 Cell[CellGroupData[{
 Cell[1478, 47, 199, 4, 27, "Input"],
-Cell[1680, 53, 586, 10, 43, "Output"]
+Cell[1680, 53, 612, 11, 43, "Output"]
 }, Open  ]],
-Cell[2281, 66, 385, 8, 27, "Input"],
-Cell[2669, 76, 964, 26, 43, "Input"],
-Cell[3636, 104, 261, 7, 27, "Input"],
-Cell[3900, 113, 260, 7, 27, "Input"],
-Cell[4163, 122, 464, 11, 27, "Input"],
-Cell[4630, 135, 699, 14, 27, "Input"],
-Cell[5332, 151, 324, 8, 27, "Input"],
+Cell[2307, 67, 385, 8, 27, "Input"],
+Cell[2695, 77, 964, 26, 43, "Input"],
+Cell[3662, 105, 261, 7, 27, "Input"],
+Cell[3926, 114, 260, 7, 27, "Input"],
+Cell[4189, 123, 464, 11, 27, "Input"],
+Cell[4656, 136, 324, 8, 27, "Input"],
 Cell[CellGroupData[{
-Cell[5681, 163, 3111, 68, 178, "Input"],
-Cell[8795, 233, 11836, 177, 373, "Output"]
+Cell[5005, 148, 6410, 135, 373, "Input"],
+Cell[11418, 285, 13030, 197, 485, "Output"]
 }, Open  ]],
-Cell[20646, 413, 92, 1, 27, "Input"]
+Cell[24463, 485, 92, 1, 27, "Input"]
 }
 ]
 *)
