@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     25554,        526]
-NotebookOptionsPosition[     24730,        495]
-NotebookOutlinePosition[     25088,        511]
-CellTagsIndexPosition[     25045,        508]
+NotebookDataLength[     26139,        540]
+NotebookOptionsPosition[     25315,        509]
+NotebookOutlinePosition[     25673,        525]
+CellTagsIndexPosition[     25630,        522]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -220,13 +220,21 @@ Cell[BoxData[
                    "\[IndentingNewLine]", 
                    RowBox[{
                     RowBox[{"dc", " ", "=", " ", 
+                    RowBox[{"Sort", "[", 
+                    RowBox[{
                     RowBox[{"Select", "[", 
                     RowBox[{"ddata", ",", 
                     RowBox[{
                     RowBox[{
                     RowBox[{"#", "[", 
                     RowBox[{"[", "2", "]"}], "]"}], "\[LessEqual]", " ", 
-                    "distance"}], " ", "&"}]}], "]"}]}], ";", 
+                    "distance"}], " ", "&"}]}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"#1", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], "<", 
+                    RowBox[{"#2", "[", 
+                    RowBox[{"[", "2", "]"}], "]"}]}], "&"}]}], "]"}]}], ";", 
                     "\[IndentingNewLine]", 
                     RowBox[{"dp", "=", 
                     RowBox[{"dc", "[", 
@@ -299,7 +307,9 @@ Cell[BoxData[
    3.521468862770249*^9, 3.521468876539213*^9}, {3.521468926314081*^9, 
    3.521468948205675*^9}, {3.52146898998214*^9, 3.521468991405737*^9}, {
    3.5214690409468412`*^9, 3.5214691097846937`*^9}, {3.521469143211281*^9, 
-   3.521469196106104*^9}, {3.521469228131336*^9, 3.52146925294195*^9}}],
+   3.521469196106104*^9}, {3.521469228131336*^9, 3.52146925294195*^9}, {
+   3.5214693735349073`*^9, 3.521469404903006*^9}, {3.521469446511922*^9, 
+   3.521469446792433*^9}}],
 
 Cell[BoxData[
  TagBox[
@@ -372,11 +382,11 @@ Cell[BoxData[
        "YEMEN", "YUGOS AVIA", "YUGOSLAVIA", "ZAIRE", "ZAMBI", "ZAMBIA", 
        "ZIMBABWE", "ZIMBA WE"}}}, Typeset`size$$ = {886., {982., 988.}}, 
     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    True, $CellContext`country$55661$$ = 0}, 
+    True, $CellContext`country$59919$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`country$$ = "AATAR"}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`country$$, $CellContext`country$55661$$, 0]}, 
+        Hold[$CellContext`country$$, $CellContext`country$59919$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -400,8 +410,11 @@ $CellContext`maxdist = Max[$CellContext`dst], $CellContext`fp =
              Manipulate[
               
               Module[{$CellContext`dc, $CellContext`dp}, $CellContext`dc = 
-                Select[$CellContext`ddata, 
-                  Part[#, 2] <= $CellContext`distance& ]; $CellContext`dp = 
+                Sort[
+                  
+                  Select[$CellContext`ddata, 
+                   Part[#, 2] <= $CellContext`distance& ], Part[#, 2] < 
+                  Part[#2, 2]& ]; $CellContext`dp = 
                 Part[$CellContext`dc, All, 1, 4]; Column[{
                   Show[{$CellContext`wm, 
                     WorldPlot`WorldGraphics[{Blue, $CellContext`dp}], 
@@ -487,7 +500,8 @@ $CellContext`maxdist = Max[$CellContext`dst], $CellContext`fp =
    Deployed->True,
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{{3.5214692020126467`*^9, 3.521469253626491*^9}}]
+ CellChangeTimes->{{3.5214692020126467`*^9, 3.521469253626491*^9}, 
+   3.521469405968039*^9, 3.521469448088766*^9}]
 }, Open  ]],
 
 Cell[BoxData[""], "Input",
@@ -524,10 +538,10 @@ Cell[3948, 114, 260, 7, 27, "Input"],
 Cell[4211, 123, 464, 11, 27, "Input"],
 Cell[4678, 136, 324, 8, 27, "Input"],
 Cell[CellGroupData[{
-Cell[5027, 148, 7372, 153, 388, "Input"],
-Cell[12402, 303, 12217, 186, 2071, "Output"]
+Cell[5027, 148, 7817, 163, 388, "Input"],
+Cell[12847, 313, 12357, 190, 2071, "Output"]
 }, Open  ]],
-Cell[24634, 492, 92, 1, 27, "Input"]
+Cell[25219, 506, 92, 1, 27, "Input"]
 }
 ]
 *)
