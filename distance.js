@@ -10,3 +10,8 @@ function loadData(cb) {
     }
     xobj.send(null);
 }
+
+function weather_distance(from, to)
+{
+    return 1;
+}

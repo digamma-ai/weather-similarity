@@ -11,14 +11,22 @@
         document.getElementById("b1").disabled=false;
         }
 
+        function test()
+        {
+        var kiev="333450";
+        var sf="724940";
+        alert(weather_distance(mapdict[kiev],mapdict[sf]));
+        }
+
         var mapdict;
         loadData(enableB1);
+
       </script>
 
       <button id="b1" 
               disabled="true"
               type="run" 
-              onclick="displayDate()">Display Date</button>
+              onclick="test()">Display Date</button>
 
     </body>
 </html>
