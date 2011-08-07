@@ -13,5 +13,11 @@ function loadData(cb) {
 
 function weather_distance(from, to)
 {
-    return 1;
+    var ft=from["Temps"];
+    var tt=to["Temps"];
+    var i=0;
+    var d=0;
+    for(i=0;i<12;i++)
+        d=d+Math.abs(ft[i]-tt[i])
+    return d;
 }
