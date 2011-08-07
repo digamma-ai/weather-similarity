@@ -1,13 +1,24 @@
 <html>
   <head>
+    <script type="text/javascript" src="json_parse.js"></script>
     <script type="text/javascript" src="distance.js"></script>
   <head>
     <body>
-      <p id="mapdict"></p>
+      <p id="p1"></p>
       
       <script type="text/javascript">
-        alert("loading");
-        loadData();
+        function enableB1() {
+        document.getElementById("b1").disabled=false;
+        }
+
+        var mapdict;
+        loadData(enableB1);
       </script>
+
+      <button id="b1" 
+              disabled="true"
+              type="run" 
+              onclick="displayDate()">Display Date</button>
+
     </body>
 </html>
