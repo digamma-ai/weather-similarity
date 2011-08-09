@@ -20,6 +20,7 @@
 
     .sidebar 
     {
+        margin-top: 1em;
         width: 220px;
         float: left;
         height: 100%;
@@ -46,6 +47,7 @@
     
     var mode = SELECT_MODE;
     var map = null;
+    var current_station = null;
     
     function init() 
     {
@@ -77,21 +79,41 @@
                 size: new google.maps.Size(50,50)
               });
               
+              attachNumber(marker, x);
+             /* 
               google.maps.event.addListener(marker, 'click', 
               function()
               {
                 infowindow.open(map,marker);
                 markerClicked();
-              });    
+              });
+              */
             x.Marker = marker;
         }
+    }
+    
+    function attachNumber(marker, x) 
+    {
+/*
+        var infowindow = new google.maps.InfoWindow(
+        { 
+            content: x.Name,
+            size: new google.maps.Size(50,50)
+        });
+*/        
+        google.maps.event.addListener(marker, 'click', function() {
+//            infowindow.open(map,marker);
+            markerClicked(x.Number);
+        });
     }
     
     function markerClicked(id)
     {
         if(mode == SELECT_MODE)
         {
-            alert(mapdict[id].Name + " selected");
+            current_station = mapdict[id]; 
+            //alert(mapdict[id].Name + " selected");
+            get("current_station").innerHTML = current_station.Name;
         }
         else
         if(mode == SHOW_MODE)
