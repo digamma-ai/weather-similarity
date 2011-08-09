@@ -60,6 +60,7 @@
     var mode = SELECT_MODE;
     var map = null;
     var current_station = null;
+    var infowindow = null;
     
     function init() 
     {
@@ -85,11 +86,6 @@
                 map: map, 
                 title: x.Name
                 }); 
-              var infowindow = new google.maps.InfoWindow(
-              { 
-                content: x.Name,
-                size: new google.maps.Size(50,50)
-              });
               
               attachNumber(marker, x);
               x.Marker = marker;
@@ -99,13 +95,16 @@
   
     function attachNumber(marker, x) 
     {
-        var infowindow = new google.maps.InfoWindow(
+        if(infowindow != null)
+            infowindow.close();
+
+        var _infowindow = new google.maps.InfoWindow(
         { 
             content: x.Name + " " + x.Country  +" <br> " + " SOMETHING, SOMETHING",
             size: new google.maps.Size(50,50)
         });
-        //TODO: maybe remember the window in global var and close if another one is selected
         google.maps.event.addListener(marker, 'click', function() {
+            infowindow = _infowindow;
             infowindow.open(map,marker);
             markerClicked(x.Number);
         });
@@ -116,7 +115,7 @@
         if(mode == SELECT_MODE)
         {
             current_station_id = id; 
-            get("current_station").innerHTML = mapdict[current_station_id].Name;
+            get("current_station").innerHTML = mapdict[current_station_id].Name + ", " + mapdict[current_station_id].Country;
             get("change_button").disabled = false;
             
             //TODO: calculate closest stations
@@ -136,9 +135,13 @@
     
     function showAllMarkers()
     {
+        if(infowindow != null)
+            infowindow.close();
+            
         for(i in mapdict)
         {
             mapdict[i].Marker.setVisible(true);
+            mapdict[i].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png");
         }
     }
     
@@ -164,6 +167,7 @@
     {
         mode = SELECT_MODE;
         get("change_button").disabled = true;
+        get("current_station").innerHTML = "";
         showAllMarkers();
     }
     
@@ -176,7 +180,7 @@
 
     <div id="work_area" class="sidebar">
         <div>From:&nbsp;<span id="current_station"></span>&nbsp;
-        <button id="change_button" type="button" disabled="false" onclick="change()">Change</button>
+        <button id="change_button" type="button" disabled="false" onclick="changeStation()">Change</button>
         </div>
     </div> 
     <div id="map_canvas" class="map_canvas"></div>
