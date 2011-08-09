@@ -21,7 +21,7 @@
     .sidebar 
     {
         margin-top: 1em;
-        width: 220px;
+        width: 300px;
         float: left;
         height: 100%;
         padding: 5px;
@@ -41,7 +41,19 @@
         return document.getElementById(id);
     }
     
-    
+    Array.prototype.contains = function(obj) 
+    {
+        var i = this.length;
+        while (i--) 
+        {
+            if (this[i] === obj) 
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     var SELECT_MODE = 0;
     var SHOW_MODE   = 1;
     
@@ -80,29 +92,21 @@
               });
               
               attachNumber(marker, x);
-             /* 
-              google.maps.event.addListener(marker, 'click', 
-              function()
-              {
-                infowindow.open(map,marker);
-                markerClicked();
-              });
-              */
-            x.Marker = marker;
+              x.Marker = marker;
         }
     }
-    
+  
+  
     function attachNumber(marker, x) 
     {
-/*
         var infowindow = new google.maps.InfoWindow(
         { 
-            content: x.Name,
+            content: x.Name + " " + x.Country  +" <br> " + " SOMETHING, SOMETHING",
             size: new google.maps.Size(50,50)
         });
-*/        
+        //TODO: maybe remember the window in global var and close if another one is selected
         google.maps.event.addListener(marker, 'click', function() {
-//            infowindow.open(map,marker);
+            infowindow.open(map,marker);
             markerClicked(x.Number);
         });
     }
@@ -111,13 +115,22 @@
     {
         if(mode == SELECT_MODE)
         {
-            current_station = mapdict[id]; 
-            //alert(mapdict[id].Name + " selected");
-            get("current_station").innerHTML = current_station.Name;
+            current_station_id = id; 
+            get("current_station").innerHTML = mapdict[current_station_id].Name;
+            get("change_button").disabled = false;
+            
+            //TODO: calculate closest stations
+            
+            var closest = ["724940", "723893"];
+            
+            hideDistantMarkers(closest);
+            
+            mode = SHOW_MODE;
         }
         else
         if(mode == SHOW_MODE)
         {
+            //TODO: what to do here?
         }
     }
     
@@ -126,6 +139,24 @@
         for(i in mapdict)
         {
             mapdict[i].Marker.setVisible(true);
+        }
+    }
+    
+    function hideDistantMarkers(closest)
+    {
+        for(i in mapdict)
+        {
+            if(i == current_station_id)
+            {
+                mapdict[i].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png");
+            }
+            else
+            if(closest.contains(i))
+            {
+                mapdict[i].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png");
+            }
+            else
+                mapdict[i].Marker.setVisible(false);
         }
     }
     
