@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     26712,        552]
-NotebookOptionsPosition[     25849,        520]
-NotebookOutlinePosition[     26207,        536]
-CellTagsIndexPosition[     26164,        533]
+NotebookDataLength[     26747,        553]
+NotebookOptionsPosition[     25885,        521]
+NotebookOutlinePosition[     26243,        537]
+CellTagsIndexPosition[     26200,        534]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -62,7 +62,7 @@ Cell[BoxData[
   "}"}]], "Output",
  CellChangeTimes->{{3.521421225549981*^9, 3.521421230124789*^9}, 
    3.521421354739725*^9, 3.5214214069229097`*^9, 3.521425515293713*^9, 
-   3.521426759389145*^9, 3.521468911915019*^9}]
+   3.521426759389145*^9, 3.521468911915019*^9, 3.52184220515755*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -320,8 +320,8 @@ Cell[BoxData[
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`country$$ = "USA---------", Typeset`show$$ =
-     True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+   DynamicModuleBox[{$CellContext`country$$ = "AATAR", Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{
       Hold[$CellContext`country$$], {
@@ -386,13 +386,13 @@ Cell[BoxData[
        "VANUATU", "VENEZUALA", "VENEZUELA", "VIETNAM", "WALLIS ISLAND", 
        "WASH", "WESTERN SAHAR", "W.GER ANY", "W.GERMANY", "YAN-OLGIY", 
        "YEMEN", "YUGOS AVIA", "YUGOSLAVIA", "ZAIRE", "ZAMBI", "ZAMBIA", 
-       "ZIMBABWE", "ZIMBA WE"}}}, Typeset`size$$ = {886., {944., 950.}}, 
+       "ZIMBABWE", "ZIMBA WE"}}}, Typeset`size$$ = {886., {329., 335.}}, 
     Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    True, $CellContext`country$66081$$ = 0}, 
+    True, $CellContext`country$925$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      1, StandardForm, "Variables" :> {$CellContext`country$$ = "AATAR"}, 
       "ControllerVariables" :> {
-        Hold[$CellContext`country$$, $CellContext`country$66081$$, 0]}, 
+        Hold[$CellContext`country$$, $CellContext`country$925$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -497,7 +497,7 @@ $CellContext`maxdist = Max[$CellContext`dst], $CellContext`fp =
           "W.GERMANY", "YAN-OLGIY", "YEMEN", "YUGOS AVIA", "YUGOSLAVIA", 
           "ZAIRE", "ZAMBI", "ZAMBIA", "ZIMBABWE", "ZIMBA WE"}}}, 
       "Options" :> {}, "DefaultOptions" :> {}],
-     ImageSizeCache->{929., {986., 992.}},
+     ImageSizeCache->{929., {371., 377.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
@@ -509,7 +509,8 @@ $CellContext`maxdist = Max[$CellContext`dst], $CellContext`fp =
   Manipulate`InterpretManipulate[1]]], "Output",
  CellChangeTimes->{{3.5214692020126467`*^9, 3.521469253626491*^9}, 
    3.521469405968039*^9, 3.521469448088766*^9, 3.5214724525408173`*^9, 
-   3.5214725784058933`*^9, 3.5214726308820047`*^9, 3.521472676356646*^9}]
+   3.5214725784058933`*^9, 3.5214726308820047`*^9, 3.521472676356646*^9, 
+   3.521842205407749*^9}]
 }, Open  ]],
 
 Cell[BoxData[" "], "Input",
@@ -540,20 +541,20 @@ Cell[685, 24, 589, 13, 27, "Input"],
 Cell[1277, 39, 176, 4, 27, "Input"],
 Cell[CellGroupData[{
 Cell[1478, 47, 199, 4, 27, "Input"],
-Cell[1680, 53, 634, 11, 27, "Output"]
+Cell[1680, 53, 655, 11, 27, "Output"]
 }, Open  ]],
-Cell[2329, 67, 385, 8, 27, "Input"],
-Cell[2717, 77, 964, 26, 27, "Input"],
-Cell[3684, 105, 261, 7, 27, "Input"],
-Cell[3948, 114, 260, 7, 27, "Input"],
-Cell[4211, 123, 464, 11, 27, "Input"],
-Cell[4678, 136, 412, 11, 27, "Input"],
+Cell[2350, 67, 385, 8, 27, "Input"],
+Cell[2738, 77, 964, 26, 27, "Input"],
+Cell[3705, 105, 261, 7, 27, "Input"],
+Cell[3969, 114, 260, 7, 27, "Input"],
+Cell[4232, 123, 464, 11, 27, "Input"],
+Cell[4699, 136, 412, 11, 27, "Input"],
 Cell[CellGroupData[{
-Cell[5115, 151, 8048, 166, 388, "Input"],
-Cell[13166, 319, 12476, 192, 1995, "Output"]
+Cell[5136, 151, 8048, 166, 388, "Input"],
+Cell[13187, 319, 12491, 193, 765, "Output"]
 }, Open  ]],
-Cell[25657, 514, 93, 1, 27, "Input"],
-Cell[25753, 517, 92, 1, 27, "Input"]
+Cell[25693, 515, 93, 1, 27, "Input"],
+Cell[25789, 518, 92, 1, 27, "Input"]
 }
 ]
 *)
