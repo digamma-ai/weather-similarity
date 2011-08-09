@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+
+    html { height: 100% }
+    body { height: 100%; margin: 0; padding: 0 }
+  
+    .container 
+    { 
+        height: 100%;
+        width: 100%
+    }
+
+    .map_canvas 
+    { 
+        height: 100%
+    }
+
+    .sidebar 
+    {
+        width: 220px;
+        float: left;
+        height: 100%;
+        padding: 5px;
+    }
+    
+</style>
+
+    <script type="text/javascript" src="datadict.json"></script>
+    <script type="text/javascript" src="distance.js"></script>
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    
+    <script type="text/javascript">
+    
+    function get(id)
+    {
+        return document.getElementById(id);
+    }
+    
+    
+    var SELECT_MODE = 0;
+    var SHOW_MODE   = 1;
+    
+    var mode = SELECT_MODE;
+    var map = null;
+    
+    function init() 
+    {
+        var center = new google.maps.LatLng(37.257266,-122.03396);
+        var options = {
+            zoom: 9,
+            center: center,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"), options);
+        
+        createMarkers();
+    }
+
+    function createMarkers()
+    {
+        for(i in mapdict)
+        {
+             var x = mapdict[i];
+             
+             var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(x.Lat, -1*x.Long), 
+                map: map, 
+                title: x.Name
+                }); 
+              var infowindow = new google.maps.InfoWindow(
+              { 
+                content: x.Name,
+                size: new google.maps.Size(50,50)
+              });
+              
+              google.maps.event.addListener(marker, 'click', 
+              function()
+              {
+                infowindow.open(map,marker);
+                markerClicked();
+              });    
+            x.Marker = marker;
+        }
+    }
+    
+    function markerClicked(id)
+    {
+        if(mode == SELECT_MODE)
+        {
+            alert(mapdict[id].Name + " selected");
+        }
+        else
+        if(mode == SHOW_MODE)
+        {
+        }
+    }
+    
+    function showAllMarkers()
+    {
+        for(i in mapdict)
+        {
+            mapdict[i].Marker.setVisible(true);
+        }
+    }
+    
+    function changeStation()
+    {
+        mode = SELECT_MODE;
+        get("change_button").disabled = true;
+        showAllMarkers();
+    }
+    
+    </script>
+
+</head>
+
+<body onload="init()">
+    <div class="container">
+
+    <div id="work_area" class="sidebar">
+        <div>From:&nbsp;<span id="current_station"></span>&nbsp;
+        <button id="change_button" type="button" disabled="false" onclick="change()">Change</button>
+        </div>
+    </div> 
+    <div id="map_canvas" class="map_canvas"></div>
+    
+    </div>
+</body>
+</html>

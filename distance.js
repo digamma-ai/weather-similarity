@@ -1,15 +1,26 @@
+/*
 function loadData(cb) {   
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
     xobj.open('GET', 'datadict.json', true);
     xobj.onreadystatechange = function () {
+            alert(xobj.responseText.length)
         if (xobj.readyState == 4) {
+        try{
+            alert("GOT".length);
             mapdict = json_parse(xobj.responseText);
+            alert(1);
             cb();
+            alert(2);
+            } catch(e) 
+            {
+            alert(e.error)
+            }
         }
     }
     xobj.send(null);
 }
+*/
 
 function weather_distance(from, to)
 {

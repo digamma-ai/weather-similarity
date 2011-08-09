@@ -1,15 +1,12 @@
 <html>
   <head>
-    <script type="text/javascript" src="json_parse.js"></script>
+    <script type="text/javascript" src="datadict.json"></script>
     <script type="text/javascript" src="distance.js"></script>
   <head>
     <body>
       <p id="p1"></p>
       
       <script type="text/javascript">
-        function enableB1() {
-        document.getElementById("b1").disabled=false;
-        }
 
         function test() {
         var kiev="333450";
@@ -31,7 +28,6 @@
       </script>
 
       <button id="b1" 
-              disabled="true"
               type="button" 
               onclick="test()">Run</button>
 
