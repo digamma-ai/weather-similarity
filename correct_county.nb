@@ -1,0 +1,404 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     12211,        395]
+NotebookOptionsPosition[     10972,        351]
+NotebookOutlinePosition[     11329,        367]
+CellTagsIndexPosition[     11286,        364]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"Rest", "[", 
+    RowBox[{"Import", "[", 
+     RowBox[{
+      RowBox[{"ToFileName", "[", 
+       RowBox[{
+        RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<data.csv\>\""}], 
+       "]"}], ",", "\"\<CSV\>\""}], "]"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"coords", " ", "=", 
+   RowBox[{"data", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", 
+      RowBox[{"4", ";;", "5"}]}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.5219038447097282`*^9, 3.5219038494346046`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"pnPoly", "::", "usage"}], "=", 
+   "\"\<\n  pnPoly[{testx,testy},{{x1,y1},{x2,y2},...}] return true if \
+{testx,testy} in inside polygon. \n  Polygon can be closed or not. A point \
+will be inside exactly one member of a polygonal partitioning.\n  C-code by \
+W. Randolph Franklin \
+(http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html). \n  \
+J. Wesenberg, 2008\>\""}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"pnPoly", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"testx_", ",", "testy_"}], "}"}], ",", "pts_List"}], "]"}], ":=", 
+  RowBox[{"Xor", "@@", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Xor", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", 
+             RowBox[{"1", ",", "2"}], "]"}], "]"}], ">", "testy"}], ",", 
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", 
+             RowBox[{"2", ",", "2"}], "]"}], "]"}], ">", "testy"}]}], "]"}], "&&", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"testx", "-", 
+            RowBox[{"#", "[", 
+             RowBox[{"[", 
+              RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ")"}], "<", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"#", "[", 
+              RowBox[{"[", 
+               RowBox[{"1", ",", "1"}], "]"}], "]"}], "-", 
+             RowBox[{"#", "[", 
+              RowBox[{"[", 
+               RowBox[{"2", ",", "1"}], "]"}], "]"}]}], ")"}], " ", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"testy", "-", 
+              RowBox[{"#", "[", 
+               RowBox[{"[", 
+                RowBox[{"2", ",", "2"}], "]"}], "]"}]}], ")"}], "/", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"#", "[", 
+               RowBox[{"[", 
+                RowBox[{"1", ",", "2"}], "]"}], "]"}], "-", 
+              RowBox[{"#", "[", 
+               RowBox[{"[", 
+                RowBox[{"2", ",", "2"}], "]"}], "]"}]}], ")"}]}]}]}], ")"}]}],
+        ")"}], "&"}], "/@", 
+     RowBox[{"Partition", "[", 
+      RowBox[{"pts", ",", "2", ",", "1", ",", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", "2"}], "}"}]}], "]"}]}], ")"}]}]}]}], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"pnCountry", "[", 
+   RowBox[{"p_", ",", "country_"}], "]"}], ":=", "  ", 
+  RowBox[{"Fold", "[", 
+   RowBox[{"Or", ",", " ", "False", ",", 
+    RowBox[{"Map", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"pnPoly", "[", 
+        RowBox[{
+         RowBox[{"Reverse", "[", "p", "]"}], ",", "#"}], "]"}], "&"}], ",", 
+      RowBox[{
+       RowBox[{"CountryData", "[", 
+        RowBox[{"country", ",", "\"\<FullPolygon\>\""}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"findCountry", "[", "p_", "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"l", ",", "m"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Select", "[", 
+     RowBox[{
+      RowBox[{"CountryData", "[", "All", "]"}], ",", 
+      RowBox[{
+       RowBox[{"pnCountry", "[", 
+        RowBox[{"p", ",", "#"}], "]"}], " ", "&"}]}], "]"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"kievcoord", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Select", "[", 
+     RowBox[{"data", ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], "==", "333450"}], "&"}]}], "]"}], 
+    "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", 
+      RowBox[{"4", ";;", "5"}]}], "]"}], "]"}], " ", "*", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     RowBox[{"-", "1"}]}], "}"}]}]}]], "Input",
+ CellChangeTimes->{{3.52190395094617*^9, 3.521903980436974*^9}, {
+  3.521904088344768*^9, 3.521904091527625*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"50.4`", ",", "30.5`"}], "}"}]], "Output",
+ CellChangeTimes->{{3.521903961873212*^9, 3.521903980942779*^9}, 
+   3.521904025911419*^9, 3.5219040919411707`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mcountry", " ", "=", " ", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"findCountry", "[", 
+       RowBox[{"#", "*", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", 
+          RowBox[{"-", "1"}]}], "}"}]}], "]"}], "&"}], ",", "coords"}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.521904127434133*^9, 3.5219041989131737`*^9}, {
+  3.521904231892158*^9, 3.5219042448503103`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"mcountry1", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Length", "[", "#", "]"}], ">", "0"}], " ", ",", 
+        RowBox[{"CountryData", "[", 
+         RowBox[{
+          RowBox[{"#", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<Name\>\""}], "]"}], ",", 
+        "\"\<\>\""}], "]"}], "&"}], ",", "mcountry"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.5219151779700947`*^9, 3.521915252681326*^9}, 
+   3.5219152876183662`*^9, {3.5219153527311287`*^9, 3.521915415412594*^9}, {
+   3.521915617688909*^9, 3.5219156408174877`*^9}, {3.521915738548848*^9, 
+   3.521915746730832*^9}, 3.521916016756957*^9, {3.5219165711639137`*^9, 
+   3.521916584856887*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ocountry", "=", 
+   RowBox[{"data", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "3"}], "]"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.521915422115169*^9, 3.521915456108613*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ncountry", " ", "=", " ", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"!", 
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "==", "\"\<\>\""}]}], " ", "||", 
+         " ", 
+         RowBox[{
+          RowBox[{"ToLowerCase", "[", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], "]"}], "==", 
+          RowBox[{"ToLowerCase", "[", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "]"}]}]}], ",", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "1", "]"}], "]"}], ",", 
+        RowBox[{"#", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], "]"}], " ", "&"}], ",", 
+     RowBox[{"Transpose", "[", 
+      RowBox[{"{", 
+       RowBox[{"mcountry1", ",", "ocountry"}], "}"}], "]"}]}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.521915459672307*^9, 3.52191547458869*^9}, 
+   3.52191563002385*^9, {3.5219156628911047`*^9, 3.5219156674242897`*^9}, {
+   3.5219157881256104`*^9, 3.521915912552541*^9}, {3.521915956927329*^9, 
+   3.521915961183201*^9}, {3.52191659284445*^9, 3.521916636397191*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ncountry1", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"StringReplace", "[", 
+       RowBox[{"#", ",", 
+        RowBox[{
+         RowBox[{"RegularExpression", "[", "\"\<-+$\>\"", "]"}], "\[Rule]", 
+         "\"\<\>\""}]}], "]"}], "&"}], ",", "ncountry"}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.5219167972149487`*^9, 3.521916811833366*^9}, {
+  3.521916861409631*^9, 3.52191699848206*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"city", "=", 
+   RowBox[{"data", "[", 
+    RowBox[{"[", 
+     RowBox[{"All", ",", "2"}], "]"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ncity", "=", 
+   RowBox[{"Map", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"StringReplace", "[", 
+       RowBox[{"#", ",", 
+        RowBox[{
+         RowBox[{"RegularExpression", "[", "\"\<-+$\>\"", "]"}], "\[Rule]", 
+         "\"\<\>\""}]}], "]"}], "&"}], ",", "city"}], "]"}]}], ";"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tdata", "=", " ", 
+   RowBox[{"Transpose", "[", "data", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.521916064058605*^9, 3.521916108049183*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ntdata", " ", "=", " ", 
+   RowBox[{"Join", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"tdata", "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "}"}], ",", 
+     RowBox[{"{", "ncity", "}"}], ",", 
+     RowBox[{"{", "ncountry1", "}"}], ",", 
+     RowBox[{"tdata", "[", 
+      RowBox[{"[", 
+       RowBox[{"4", ";;", "18"}], "]"}], "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.521916114326704*^9, 3.521916196835142*^9}, 
+   3.521916958610177*^9, {3.521917122525696*^9, 3.521917160941183*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"newdata", "=", 
+   RowBox[{"Transpose", "[", "ntdata", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.521916177950191*^9, 3.5219162250427647`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dimensions", "[", "data", "]"}]], "Input",
+ CellChangeTimes->{{3.5219171727522163`*^9, 3.521917175981348*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"4336", ",", "18"}], "}"}]], "Output",
+ CellChangeTimes->{3.521917176480935*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Dimensions", "[", "newdata", "]"}]], "Input",
+ CellChangeTimes->{{3.521917167892625*^9, 3.521917170669162*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"4336", ",", "18"}], "}"}]], "Output",
+ CellChangeTimes->{3.521917171087626*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"ToFileName", "[", 
+    RowBox[{
+     RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<newdata.csv\>\""}], 
+    "]"}], ",", "newdata"}], "]"}]], "Input",
+ CellChangeTimes->{{3.521916253863379*^9, 3.521916277323802*^9}}],
+
+Cell[BoxData["\<\"/Users/lord/src/weather_similarity/newdata.csv\"\>"], \
+"Output",
+ CellChangeTimes->{
+  3.5219162800500298`*^9, 3.521916964242011*^9, 3.521917006507325*^9, {
+   3.521917165431323*^9, 3.521917181437902*^9}}]
+}, Open  ]]
+},
+WindowSize->{740, 842},
+WindowMargins->{{262, Automatic}, {Automatic, 0}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (February 23, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 310, 9, 27, "Input"],
+Cell[870, 31, 260, 7, 27, "Input"],
+Cell[1133, 40, 2322, 65, 208, "Input"],
+Cell[3458, 107, 543, 15, 43, "Input"],
+Cell[4004, 124, 459, 13, 58, "Input"],
+Cell[CellGroupData[{
+Cell[4488, 141, 566, 18, 27, "Input"],
+Cell[5057, 161, 197, 4, 27, "Output"]
+}, Open  ]],
+Cell[5269, 168, 445, 13, 27, "Input"],
+Cell[5717, 183, 796, 20, 27, "Input"],
+Cell[6516, 205, 225, 6, 27, "Input"],
+Cell[6744, 213, 1211, 32, 58, "Input"],
+Cell[7958, 247, 463, 13, 27, "Input"],
+Cell[8424, 262, 155, 5, 27, "Input"],
+Cell[8582, 269, 336, 10, 27, "Input"],
+Cell[8921, 281, 182, 4, 27, "Input"],
+Cell[9106, 287, 543, 14, 27, "Input"],
+Cell[9652, 303, 183, 4, 27, "Input"],
+Cell[CellGroupData[{
+Cell[9860, 311, 134, 2, 27, "Input"],
+Cell[9997, 315, 119, 3, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10153, 323, 135, 2, 27, "Input"],
+Cell[10291, 327, 119, 3, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10447, 335, 282, 7, 27, "Input"],
+Cell[10732, 344, 224, 4, 27, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
