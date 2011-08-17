@@ -117,13 +117,14 @@ function showAllMarkers()
 function hideDistantMarkers(dstp)
 {
     console.log("hideDistantMarkers called "+dstp);
+    if (!sorted)
+    	return;
     var dst;
     if(dstp==0)
         dst = mindist;
     else
         dst = mindist + ((maxdist - mindist)*100)/dstp;
-    var i=0;
-    for(i=0;i<sorted.length;i++)
+    for(var i=0;i<sorted.length;i++)
     {
         var x=sorted[i];
         if(x.dist <= dst) {

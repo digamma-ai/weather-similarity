@@ -49,12 +49,12 @@
             <tr>
               <td>
                 <input name="sliderValue" id="sliderValue" type="Text" size="3"
-                       style="border: 1px solid gray;width:25px; height:16px; font-size: 10px;" onChange="hideDistantMarkers(A_SLIDERS[0].f_getPos())">
+                       style="border: 1px solid gray;width:25px; height:16px; font-size: 10px;">
               </td>
               <td>
                 %
               </td>
-              <td onmouseup="hideDistantMarkers(A_SLIDERS[0].f_getPos())">
+              <td>
                 <script language="JavaScript">
                   
                   var SELECT_MODE = 0;
@@ -89,7 +89,8 @@
 			      'n_minValue' : 0,
 			      'n_maxValue' : 100,
 			      'n_value' : 50,
-			      'n_step' : 1
+			      'n_step' : 1,
+			      "f_callback" : hideDistantMarkers
 		          }
 
 	              new slider(A_INIT, A_TPL);

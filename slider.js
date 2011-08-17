@@ -97,6 +97,8 @@ function f_sliderSetValue (n_value, b_noInputCheck) {
 			return b_noInputCheck ? null : f_sliderError(this.n_id, "Can not find the input with NAME='" + this.s_name + "'.");
 	}
 	e_input.value = n_value;
+	if (this.f_callback)
+		this.f_callback(n_value);
 }
 
 // get absolute position of the element in the document
