@@ -187,29 +187,29 @@
         <form action="single_slider_demo.html" method="get" name="demoForm">
           <input name="sliderValue" id="sliderValue" type="Text" size="3">
           <script language="JavaScript">
-	        var A_TPL = {
-		    'b_vertical' : false,
-		    'b_watch': true,
-		    'n_controlWidth': 120,
-		    'n_controlHeight': 16,
-		    'n_sliderWidth': 16,
-		    'n_sliderHeight': 15,
-		    'n_pathLeft' : 1,
-		    'n_pathTop' : 1,
-		    'n_pathLength' : 103,
-		    's_imgControl': 'img/bluev_bg.gif',
-		    's_imgSlider': 'img/bluev_sl.gif',
-		    'n_zIndex': 1
-	        }
-	        var A_INIT = {
-		    's_form' : 0,
-		    's_name': 'sliderValue',
-		    'n_minValue' : 0,
-		    'n_maxValue' : 100,
-		    'n_value' : 20,
-		    'n_step' : 1
-	        }
-            
+
+            var A_TPL = {
+			'b_vertical' : false,
+			'b_watch': true,
+			'n_controlWidth': 120,
+			'n_controlHeight': 16,
+			'n_sliderWidth': 19,
+			'n_sliderHeight': 16,
+			'n_pathLeft' : 1,
+			'n_pathTop' : 0,
+			'n_pathLength' : 98,
+			's_imgControl': 'img/sldr2h_bg.gif',
+			's_imgSlider': 'img/sldr2h_sl.gif',
+			'n_zIndex': 1
+		    }
+		    var A_INIT = {
+			's_form' : 0,
+			's_name': 'sliderValue',
+			'n_minValue' : 0,
+			'n_maxValue' : 100,
+			'n_value' : 50,
+			'n_step' : 1
+		    }
 	        new slider(A_INIT, A_TPL);
           </script>
           <input name="Submit" type="Submit" value="Submit">
