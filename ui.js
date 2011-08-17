@@ -16,18 +16,6 @@ Array.prototype.contains = function(obj)
     return false;
 }
 
-var SELECT_MODE = 0;
-var SHOW_MODE   = 1;
-
-var mode = SELECT_MODE;
-var map = null;
-var current_station = null;
-var infowindow = null;
-
-var sorted = null;
-var mindist = null;
-var maxdist = null;
-
 function init() 
 {
     var center = new google.maps.LatLng(37.257266,-122.03396);
@@ -43,6 +31,7 @@ function init()
 
 function createMarkers()
 {
+    var i;
     for(i in mapdict)
     {
         var x = mapdict[i];
@@ -63,10 +52,10 @@ function attachNumber(marker, x)
 {
     if(infowindow != null)
         infowindow.close();
-
+    
     var _infowindow = new google.maps.InfoWindow(
         { 
-            content: x.Name + " " + x.Country  +" <br> " + " SOMETHING, SOMETHING",
+            content: x.Name + ", " + x.Country,
             size: new google.maps.Size(50,50)
         });
     google.maps.event.addListener(marker, 'click', function() {
@@ -88,7 +77,8 @@ function markerClicked(id)
         mapdict[current_station_id].Marker.setVisible(true);
 
         sorted = sortByDist(current_station_id);
-        for(i in sorted)
+        var i;
+        for(i=0;i<sorted.length;i++)
         {
             var d = sorted[i].dist;
             if(mindist==null)
@@ -116,6 +106,7 @@ function showAllMarkers()
     if(infowindow != null)
         infowindow.close();
     
+    var i;
     for(i in mapdict)
     {
         mapdict[i].Marker.setVisible(true);
@@ -130,14 +121,17 @@ function hideDistantMarkers(dstp)
         dst = mindist;
     else
         dst = mindist + ((maxdist - mindist)*100)/dstp;
-    for(i in sorted)
+    var i=0;
+    for(i=0;i<sorted.length;i++)
     {
         var x=sorted[i];
         if(x.dist <= dst) {
             x.Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png");
             x.Marker.setVisible(true);
         } else
+        {
             x.Marker.setVisible(false);
+        }
     }
 }
 
