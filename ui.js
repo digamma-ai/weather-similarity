@@ -116,6 +116,7 @@ function showAllMarkers()
 
 function hideDistantMarkers(dstp)
 {
+    console.log("hideDistantMarkers called "+dstp);
     var dst;
     if(dstp==0)
         dst = mindist;
