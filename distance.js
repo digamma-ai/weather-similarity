@@ -4,8 +4,8 @@ function weather_distance(from, to)
     var i=0;
     var d=0;
     for(i=0;i<12;i++)
-        d=d+Math.abs(from[i]-to[i])
-    return d;
+        d=d+Math.pow(Math.abs(from[i]-to[i]),2)
+    return Math.sqrt(d);
 }
 
 function sortByDist(from)
