@@ -62,6 +62,10 @@
     var map = null;
     var current_station = null;
     var infowindow = null;
+
+    var sorted = null;
+    var mindist = null;
+    var maxdist = null;
     
     function init() 
     {
@@ -119,16 +123,28 @@
             get("current_station").innerHTML = mapdict[current_station_id].Name + ", " + mapdict[current_station_id].Country;
             get("change_button").disabled = false;
             
-            //TODO: calculate closest stations
-            
-            var closest = ["724940", "723893"];
-            
-            hideDistantMarkers(closest);
+            mapdict[current_station_id].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png");
+            mapdict[current_station_id].Marker.setVisible(true);
+
+            sorted = sortByDist(current_station_id);
+            for(i in sorted)
+            {
+               var d = sorted[i].dist;
+                if(mindist==null)
+                {
+                  mindist = d;
+                  maxdist = d;
+                  continue;
+                } 
+
+                if(d>maxdist) maxdist=d;
+                if(d<mindist) mindist=d;
+            }
+            A_SLIDERS[0].f_setValue(0);
+            hideDistantMarkers(0);
             
             mode = SHOW_MODE;
-        }
-        else
-        if(mode == SHOW_MODE)
+        } else if(mode == SHOW_MODE)
         {
             //TODO: what to do here?
         }
@@ -146,21 +162,21 @@
         }
     }
     
-    function hideDistantMarkers(closest)
+    function hideDistantMarkers(dstp)
     {
-        for(i in mapdict)
+        var dst;
+        if(dstp==0)
+           dst = mindist;
+        else
+           dst = mindist + ((maxdist - mindist)*100)/dstp;
+        for(i in sorted)
         {
-            if(i == current_station_id)
-            {
-                mapdict[i].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png");
-            }
-            else
-            if(closest.contains(i))
-            {
-                mapdict[i].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png");
-            }
-            else
-                mapdict[i].Marker.setVisible(false);
+            var x=sorted[i];
+            if(x.dist <= dst) {
+                x.Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png");
+                x.Marker.setVisible(true);
+            } else
+                x.Marker.setVisible(false);
         }
     }
     
@@ -186,7 +202,7 @@
 
         <form action="single_slider_demo.html" method="get" name="demoForm">
           <input name="sliderValue" id="sliderValue" type="Text" size="3"
-                 style="border: 1px solid gray;width:25px; height:16px; font-size: 10px;" onchange="A_SLIDERS[0].f_setValue(this.value)">
+                 style="border: 1px solid gray;width:25px; height:16px; font-size: 10px;" onchange="hideDistantMarkers(A_SLIDERS[0].f_getPos())">
           <script language="JavaScript">
 
             var A_TPL = {

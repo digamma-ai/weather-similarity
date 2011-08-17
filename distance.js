@@ -21,6 +21,7 @@ function sortByDist(from)
         var t1 = x["Temps"];
         delete x["Temps"];
         x.dist = weather_distance(t0,t1);
+        x.id = i;
         lst.push(x)
     }
 
