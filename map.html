@@ -185,7 +185,8 @@
         </div>
 
         <form action="single_slider_demo.html" method="get" name="demoForm">
-          <input name="sliderValue" id="sliderValue" type="Text" size="3">
+          <input name="sliderValue" id="sliderValue" type="Text" size="3"
+                 style="border: 1px solid gray;width:25px; height:16px; font-size: 10px;" onchange="A_SLIDERS[0].f_setValue(this.value)">
           <script language="JavaScript">
 
             var A_TPL = {
