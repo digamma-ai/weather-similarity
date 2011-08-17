@@ -31,6 +31,7 @@
 
     <script type="text/javascript" src="datadict.json"></script>
     <script type="text/javascript" src="distance.js"></script>
+	<script language="JavaScript" src="slider.js"></script>
 
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
     
@@ -182,6 +183,37 @@
         <div>From:&nbsp;<span id="current_station"></span>&nbsp;
         <button id="change_button" type="button" disabled="false" onclick="changeStation()">Change</button>
         </div>
+
+        <form action="single_slider_demo.html" method="get" name="demoForm">
+          <input name="sliderValue" id="sliderValue" type="Text" size="3">
+          <script language="JavaScript">
+	        var A_TPL = {
+		    'b_vertical' : false,
+		    'b_watch': true,
+		    'n_controlWidth': 120,
+		    'n_controlHeight': 16,
+		    'n_sliderWidth': 16,
+		    'n_sliderHeight': 15,
+		    'n_pathLeft' : 1,
+		    'n_pathTop' : 1,
+		    'n_pathLength' : 103,
+		    's_imgControl': 'img/bluev_bg.gif',
+		    's_imgSlider': 'img/bluev_sl.gif',
+		    'n_zIndex': 1
+	        }
+	        var A_INIT = {
+		    's_form' : 0,
+		    's_name': 'sliderValue',
+		    'n_minValue' : 0,
+		    'n_maxValue' : 100,
+		    'n_value' : 20,
+		    'n_step' : 1
+	        }
+            
+	        new slider(A_INIT, A_TPL);
+          </script>
+          <input name="Submit" type="Submit" value="Submit">
+        </form>
     </div> 
     <div id="map_canvas" class="map_canvas"></div>
     
