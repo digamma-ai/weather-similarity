@@ -55,7 +55,7 @@ function attachNumber(marker, x)
     
     var _infowindow = new google.maps.InfoWindow(
         { 
-            content: x.Name + ", " + x.Country + "<br><div id=\"mrk"+x.Number+"\"></div>"
+            content: x.Name + ", " + x.Country + "<br><div id=\"mrk"+x.Number+"\">ZZZ</div>"
             //size: new google.maps.Size(320,200)
         });
     google.maps.event.addListener(marker, 'click', function() {
@@ -107,6 +107,7 @@ function markerClicked(id)
         }
         
         // Create and draw the visualization.
+        console.log(get('mrk'+id));
         new google.visualization.ColumnChart(get('mrk'+id)).
         draw(data,
              {title:"Average Monthly Temperatures", 
