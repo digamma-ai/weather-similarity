@@ -19,7 +19,6 @@ function sortByDist(from)
             continue; //skip self
         var x = mapdict[i];
         var t1 = x["Temps"];
-        delete x["Temps"];
         x.dist = weather_distance(t0,t1);
         x.id = i;
         lst.push(x)
