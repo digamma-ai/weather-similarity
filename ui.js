@@ -55,7 +55,7 @@ function attachNumber(marker, x)
     
     var _infowindow = new google.maps.InfoWindow(
         { 
-            content: x.Name + ", " + x.Country + "<br><div id=\"mrk"+x.Number+"\"/>",
+            content: x.Name + ", " + x.Country + "<br><div id=\"mrk"+x.Number+"\"></div>",
             size: new google.maps.Size(50,50)
         });
     google.maps.event.addListener(marker, 'click', function() {
