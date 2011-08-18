@@ -102,7 +102,6 @@ function showAllMarkers()
 
 function hideDistantMarkers(dstp)
 {
-    console.log("hideDistantMarkers called "+dstp);
     if (!sorted)
     	return;
     var mindist=sorted[0].dist;
@@ -125,7 +124,7 @@ function hideDistantMarkers(dstp)
             x.Marker.setVisible(false);
         }
     }
-    console.log("found: "+n);
+    showMatches(dst)
 }
 
 function changeStation()
@@ -134,4 +133,30 @@ function changeStation()
     get("change_button").disabled = true;
     get("current_station").innerHTML = "";
     showAllMarkers();
+}
+
+function showMatches(dst)
+{
+  var tbl = get('tblMatches');
+    while(tbl.rows.length>0)
+        tbl.deleteRow(tbl.rows.length-1);
+
+    var maxdist = sorted[sorted.length-1].dist;
+    for(var i=0;i<sorted.length;i++)
+    {
+        var x=sorted[i];
+        if(x.dist > dst) 
+            break;
+        var row = tbl.insertRow(tbl.rows.length);
+
+        var c0 = row.insertCell(0);
+        c0.appendChild(document.createTextNode(x.Name));
+        var c1 = row.insertCell(1);
+        c1.appendChild(document.createTextNode(x.Country));
+        var c2 = row.insertCell(2);
+
+        var similarityp = Math.round(100*(maxdist-x.dist)/maxdist);
+
+        c2.appendChild(document.createTextNode(""+similarityp+"%"));
+    }
 }
