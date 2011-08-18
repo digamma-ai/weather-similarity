@@ -135,6 +135,12 @@ function changeStation()
     showAllMarkers();
 }
 
+function zoomToCity(id)
+{
+    var x = mapdict[id];
+    map.setCenter(x.Marker.getPosition());
+}
+
 function showMatches(dst)
 {
   var tbl = get('tblMatches');
@@ -150,7 +156,12 @@ function showMatches(dst)
         var row = tbl.insertRow(tbl.rows.length);
 
         var c0 = row.insertCell(0);
-        c0.appendChild(document.createTextNode(x.Name));
+        var lnk = document.createElement("a");
+        lnk.setAttribute("href","#");
+        lnk.setAttribute("onclick","zoomToCity(\""+x.id+"\")");
+        lnk.appendChild(document.createTextNode(x.Name));
+        c0.appendChild(lnk);
+
         var c1 = row.insertCell(1);
         c1.appendChild(document.createTextNode(x.Country));
         var c2 = row.insertCell(2);
