@@ -33,6 +33,8 @@
     <script type="text/javascript" src="ui.js"></script>
 	<script language="JavaScript" src="slider.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
 
 </head>
 
@@ -92,6 +94,9 @@
 		          }
 
 	              new slider(A_INIT, A_TPL);
+
+                  google.load("visualization", "1", {packages:["corechart"]});
+
                 </script>
                 </td>
             </tr>

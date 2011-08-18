@@ -55,7 +55,7 @@ function attachNumber(marker, x)
     
     var _infowindow = new google.maps.InfoWindow(
         { 
-            content: x.Name + ", " + x.Country,
+            content: x.Name + ", " + x.Country + "<br><div id=\"mrk"+x.Number+"\"/>",
             size: new google.maps.Size(50,50)
         });
     google.maps.event.addListener(marker, 'click', function() {
@@ -83,7 +83,37 @@ function markerClicked(id)
         mode = SHOW_MODE;
     } else if(mode == SHOW_MODE)
     {
-        //TODO: what to do here?
+        var x0 = mapdict[current_station_id];
+        var x1 = mapdict[id];
+        var t0 = x0.Temps;
+        var t1 = x1.Temps;
+        var n0 = x0.Name+","+x0.Country;
+        var n1 = x1.Name+","+x1.Country;
+
+        var data = new google.visualization.DataTable();
+        var monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+        data.addColumn('string', 'Month');
+        data.addColumn('number', n0);
+        data.addColumn('number', n1);
+  
+        data.addRows(12);
+        
+        for (var i = 0; i < 12; i++)
+        {
+            data.setValue(i, 0, monthNames[i]);    
+            data.setValue(i, 1, t0[i]);    
+            data.setValue(i, 2, t1[i]);    
+        }
+        
+        // Create and draw the visualization.
+        new google.visualization.ColumnChart(get('mrk'+id)).
+        draw(data,
+             {title:"Average Monthly Temperatures", 
+              width:600, height:400,
+              hAxis: {title: "Month"}}
+      );
+
     }
 }
 
@@ -92,8 +122,7 @@ function showAllMarkers()
     if(infowindow != null)
         infowindow.close();
     
-    var i;
-    for(i in mapdict)
+    for(var i in mapdict)
     {
         mapdict[i].Marker.setVisible(true);
         mapdict[i].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png");
