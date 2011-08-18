@@ -77,20 +77,6 @@ function markerClicked(id)
         mapdict[current_station_id].Marker.setVisible(true);
 
         sorted = sortByDist(current_station_id);
-        var i;
-        for(i=0;i<sorted.length;i++)
-        {
-            var d = sorted[i].dist;
-            if(mindist==null)
-            {
-                mindist = d;
-                maxdist = d;
-                continue;
-            } 
-
-            if(d>maxdist) maxdist=d;
-            if(d<mindist) mindist=d;
-        }
         A_SLIDERS[0].f_setValue(0);
         hideDistantMarkers(0);
         
@@ -119,22 +105,27 @@ function hideDistantMarkers(dstp)
     console.log("hideDistantMarkers called "+dstp);
     if (!sorted)
     	return;
+    var mindist=sorted[0].dist;
+    var maxdist=sorted[300].dist;
     var dst;
     if(dstp==0)
         dst = mindist;
     else
-        dst = mindist + ((maxdist - mindist)*100)/dstp;
+        dst = mindist + ((maxdist - mindist)/100)*dstp;
+    var n=0;
     for(var i=0;i<sorted.length;i++)
     {
         var x=sorted[i];
         if(x.dist <= dst) {
             x.Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png");
             x.Marker.setVisible(true);
+            n++;
         } else
         {
             x.Marker.setVisible(false);
         }
     }
+    console.log("found: "+n);
 }
 
 function changeStation()
