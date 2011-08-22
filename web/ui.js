@@ -196,8 +196,7 @@ function changeStation()
 
 function zoomToCity(id)
 {
-    var x = mapdict[id];
-    map.setCenter(x.Marker.getPosition());
+    map.setCenter(mapdict[id].position);
 }
 
 function showMatches(sim)
