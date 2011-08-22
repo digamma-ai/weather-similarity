@@ -78,63 +78,69 @@ function attachNumber(marker, x)
                 infowindow.close();
             infowindow = _infowindow;
             infowindow.open(map,marker);
+            google.maps.event.addListener(_infowindow, 'domready', function() {
+                showChart(x.Number);
+            });
         }
-        setTimeout("markerClicked(\""+x.Number+"\")", 1000); //TODO: just for debug
+        else
+        if(mode == SELECT_MODE)
+        {
+            selectStation(x.Number);
+        }
+        
     });
 }
 
-function markerClicked(id)
+function showChart(id)
 {
-    if(mode == SELECT_MODE)
+    var x0 = mapdict[current_station_id];
+    var x1 = mapdict[id];
+    var t0 = x0.Temps;
+    var t1 = x1.Temps;
+    var n0 = x0.Name+","+x0.Country;
+    var n1 = x1.Name+","+x1.Country;
+
+    var data = new google.visualization.DataTable();
+    var monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+    data.addColumn('string', 'Month');
+    data.addColumn('number', n0);
+    data.addColumn('number', n1);
+
+    data.addRows(12);
+    
+    for (var i = 0; i < 12; i++)
     {
-        current_station_id = id; 
-        get("current_station").innerHTML = mapdict[current_station_id].Name + ", " + mapdict[current_station_id].Country;
-        get("change_button").disabled = false;
-        
-        mapdict[current_station_id].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png");
-        mapdict[current_station_id].Marker.setVisible(true);
-
-        sorted = sortByDist(current_station_id);
-        A_SLIDERS[0].f_setValue(0);
-        hideDistantMarkers(0);
-        
-        mode = SHOW_MODE;
-    } else if(mode == SHOW_MODE)
-    {
-        var x0 = mapdict[current_station_id];
-        var x1 = mapdict[id];
-        var t0 = x0.Temps;
-        var t1 = x1.Temps;
-        var n0 = x0.Name+","+x0.Country;
-        var n1 = x1.Name+","+x1.Country;
-
-        var data = new google.visualization.DataTable();
-        var monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
-        data.addColumn('string', 'Month');
-        data.addColumn('number', n0);
-        data.addColumn('number', n1);
-  
-        data.addRows(12);
-        
-        for (var i = 0; i < 12; i++)
-        {
-            data.setValue(i, 0, monthNames[i]);    
-            data.setValue(i, 1, t0[i]);    
-            data.setValue(i, 2, t1[i]);    
-        }
-        
-        // Create and draw the visualization.
-        console.log(get('mrk'+id));
-        
-        new google.visualization.ColumnChart(get('mrk'+id)).
-        draw(data,
-             {title:"Average Monthly Temperatures", 
-              width:600, height:400,
-              hAxis: {title: "Month"}}
-      );
-
+        data.setValue(i, 0, monthNames[i]);    
+        data.setValue(i, 1, t0[i]);    
+        data.setValue(i, 2, t1[i]);    
     }
+    
+    // Create and draw the visualization.
+    console.log(get('mrk'+id));
+    
+    new google.visualization.ColumnChart(get('mrk'+id)).
+    draw(data,
+         {title:"Average Monthly Temperatures", 
+          width:600, height:400,
+          hAxis: {title: "Month"}}
+  );
+}
+
+function selectStation(id)
+{
+    current_station_id = id; 
+    get("current_station").innerHTML = mapdict[current_station_id].Name + ", " + mapdict[current_station_id].Country;
+    get("change_button").disabled = false;
+    
+    mapdict[current_station_id].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png");
+    mapdict[current_station_id].Marker.setVisible(true);
+
+    sorted = sortByDist(current_station_id);
+    A_SLIDERS[0].f_setValue(0);
+    hideDistantMarkers(0);
+    
+    mode = SHOW_MODE;
 }
 
 function showAllMarkers()
