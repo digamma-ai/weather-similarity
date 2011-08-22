@@ -1,4 +1,16 @@
+var SELECT_MODE = 0;
+var SHOW_MODE   = 1;
+
+var mode = SELECT_MODE;
+var map = null;
+var current_station = null;
+
 var infowindow = null;
+
+var sorted = null;
+                  
+var infowindow = null;
+var mode = SELECT_MODE;
 
 function get(id)
 {
@@ -19,7 +31,7 @@ Array.prototype.contains = function(obj)
 }
 
 function init() 
-{
+{      
     var center = new google.maps.LatLng(37.257266,-122.03396);
     var options = {
         zoom: 9,
@@ -57,13 +69,16 @@ function attachNumber(marker, x)
     
     var _infowindow = new google.maps.InfoWindow(
         { 
-            content: x.Name + ", " + x.Country + "<br><div style='width:600px;height:400px' id=\"mrk"+x.Number+"\">AFGGGGGGGG</div>"
+            content: x.Name + ", " + x.Country + "<br><div style='width:800px;height:400px' id=\"mrk"+x.Number+"\"></div>"
         });
     google.maps.event.addListener(marker, 'click', function() {
-        if(infowindow != null)
-            infowindow.close();
-        infowindow = _infowindow;
-        infowindow.open(map,marker);
+        if(mode == SHOW_MODE)
+        {
+            if(infowindow != null)
+                infowindow.close();
+            infowindow = _infowindow;
+            infowindow.open(map,marker);
+        }
         setTimeout("markerClicked(\""+x.Number+"\")", 1000); //TODO: just for debug
     });
 }
@@ -111,9 +126,7 @@ function markerClicked(id)
         
         // Create and draw the visualization.
         console.log(get('mrk'+id));
-        //get('mrk'+id).innerHTML = id;
         
-//        new google.visualization.ColumnChart(get('chart')).
         new google.visualization.ColumnChart(get('mrk'+id)).
         draw(data,
              {title:"Average Monthly Temperatures", 

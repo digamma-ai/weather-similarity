@@ -34,6 +34,9 @@
 	<script type="text/javascript" src="slider.js"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+        google.load("visualization", "1", {packages:["corechart"]});
+    </script>
 
 
 </head>
@@ -57,17 +60,7 @@
                 %
               </td>
               <td>
-                <script language="JavaScript">
-                  
-                  var SELECT_MODE = 0;
-                  var SHOW_MODE   = 1;
-                  
-                  var mode = SELECT_MODE;
-                  var map = null;
-                  var current_station = null;
-                  var infowindow = null;
-                  
-                  var sorted = null;
+                <script type="text/javascript">
                   
                   var A_TPL = {
 			      'b_vertical' : false,
@@ -94,9 +87,6 @@
 		          }
 
 	              new slider(A_INIT, A_TPL);
-
-                  google.load("visualization", "1", {packages:["corechart"]});
-
                 </script>
                 </td>
             </tr>
@@ -104,7 +94,6 @@
         </form>
         <table id="tblMatches" border="1">
         </table>
-        <div id="chart"></div>
     </div> 
     <div id="map_canvas" class="map_canvas"></div>
     
