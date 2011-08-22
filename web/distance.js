@@ -1,5 +1,5 @@
 
-function weather_distance(from, to)
+function weather_similarity(from, to)
 {
     var i=0;
     var d=0;
@@ -8,7 +8,7 @@ function weather_distance(from, to)
     return Math.sqrt(d);
 }
 
-function sortByDist(from)
+function sortBySimilarity(from)
 {
     var lst=[];
     var i;
@@ -19,14 +19,14 @@ function sortByDist(from)
             continue; //skip self
         var x = mapdict[i];
         var t1 = x["Temps"];
-        x.dist = weather_distance(t0,t1);
+        x.similarity = weather_similarity(t0,t1);
         x.id = i;
         lst.push(x)
     }
 
     lst.sort(function(a,b)
              {
-                 return a.dist - b.dist;
+                 return a.similarity - b.similarity;
              });
     return lst;
 }

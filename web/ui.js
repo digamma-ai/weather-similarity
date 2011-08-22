@@ -1,14 +1,12 @@
+
 var SELECT_MODE = 0;
 var SHOW_MODE   = 1;
 
 var mode = SELECT_MODE;
 var map = null;
 var current_station = null;
-
 var infowindow = null;
-
 var sorted = null;
-                  
 var infowindow = null;
 var mode = SELECT_MODE;
 
@@ -32,6 +30,12 @@ Array.prototype.contains = function(obj)
 
 function init() 
 {      
+    for(i in mapdict)
+    {
+        var x = mapdict[i];
+        x.position = new google.maps.LatLng(x.Lat, -1*x.Long);
+    }
+
     var center = new google.maps.LatLng(37.257266,-122.03396);
     var options = {
         zoom: 9,
@@ -51,7 +55,7 @@ function createMarkers()
         var x = mapdict[i];
         
         var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(x.Lat, -1*x.Long), 
+            position: x.position, 
             map: map, 
             title: x.Name
         }); 
@@ -136,9 +140,9 @@ function selectStation(id)
     mapdict[current_station_id].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png");
     mapdict[current_station_id].Marker.setVisible(true);
 
-    sorted = sortByDist(current_station_id);
+    sorted = sortBySimilarity(current_station_id);
     A_SLIDERS[0].f_setValue(0);
-    hideDistantMarkers(0);
+    hideDissimilarMarkers(0);
     
     mode = SHOW_MODE;
 }
@@ -155,22 +159,22 @@ function showAllMarkers()
     }
 }
 
-function hideDistantMarkers(dstp)
+function hideDissimilarMarkers(simp)
 {
     if (!sorted)
     	return;
-    var mindist=sorted[0].dist;
-    var maxdist=sorted[300].dist;
-    var dst;
-    if(dstp==0)
-        dst = mindist;
+    var minsimilarity=sorted[0].similarity;
+    var maxsimilarity=sorted[300].similarity;
+    var sim;
+    if(simp==0)
+        sim = minsimilarity;
     else
-        dst = mindist + ((maxdist - mindist)/100)*dstp;
+        sim = minsimilarity + ((maxsimilarity - minsimilarity)/100)*simp;
     var n=0;
     for(var i=0;i<sorted.length;i++)
     {
         var x=sorted[i];
-        if(x.dist <= dst) {
+        if(x.similarity <= sim) {
             x.Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png");
             x.Marker.setVisible(true);
             n++;
@@ -179,7 +183,7 @@ function hideDistantMarkers(dstp)
             x.Marker.setVisible(false);
         }
     }
-    showMatches(dst)
+    showMatches(sim)
 }
 
 function changeStation()
@@ -196,17 +200,17 @@ function zoomToCity(id)
     map.setCenter(x.Marker.getPosition());
 }
 
-function showMatches(dst)
+function showMatches(sim)
 {
-  var tbl = get('tblMatches');
+    var tbl = get('tblMatches');
     while(tbl.rows.length>0)
         tbl.deleteRow(tbl.rows.length-1);
 
-    var maxdist = sorted[sorted.length-1].dist;
+    var maxsimilarity = sorted[sorted.length-1].similarity;
     for(var i=0;i<sorted.length;i++)
     {
         var x=sorted[i];
-        if(x.dist > dst) 
+        if(x.similarity > sim) 
             break;
         var row = tbl.insertRow(tbl.rows.length);
 
@@ -221,7 +225,7 @@ function showMatches(dst)
         c1.appendChild(document.createTextNode(x.Country));
         var c2 = row.insertCell(2);
 
-        var similarityp = Math.round(100*(maxdist-x.dist)/maxdist);
+        var similarityp = Math.round(100*(maxsimilarity-x.similarity)/maxsimilarity);
 
         c2.appendChild(document.createTextNode(""+similarityp+"%"));
     }
