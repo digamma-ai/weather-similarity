@@ -222,10 +222,15 @@ function showMatches(sim)
 
         var c1 = row.insertCell(1);
         c1.appendChild(document.createTextNode(x.Country));
+
         var c2 = row.insertCell(2);
+        var distance = Math.round(x.dist/1000);
+        c2.appendChild(document.createTextNode(distance+"km"));
 
+        var c3 = row.insertCell(3);
         var similarityp = Math.round(100*(maxsimilarity-x.similarity)/maxsimilarity);
+        c3.appendChild(document.createTextNode(""+similarityp+"%"));
+        
 
-        c2.appendChild(document.createTextNode(""+similarityp+"%"));
     }
 }

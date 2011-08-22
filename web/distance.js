@@ -12,7 +12,8 @@ function sortBySimilarity(from)
 {
     var lst=[];
     var i;
-    var t0 = mapdict[from]["Temps"];
+    var t0 = mapdict[from].Temps;
+    var p0 = mapdict[from].position;
     for(i in mapdict)
     {
         if(i==from)
@@ -20,6 +21,7 @@ function sortBySimilarity(from)
         var x = mapdict[i];
         var t1 = x["Temps"];
         x.similarity = weather_similarity(t0,t1);
+        x.dist = google.maps.geometry.spherical.computeDistanceBetween(x.position, p0);
         x.id = i;
         lst.push(x)
     }
