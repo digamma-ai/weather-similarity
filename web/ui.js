@@ -223,6 +223,7 @@ function changeStation()
     mode = SELECT_MODE;
     get("change_button").disabled = true;
     get("current_station").innerHTML = "";
+    clearTable();
     showAllMarkers();
 }
 
@@ -231,12 +232,17 @@ function centerOnCity(id)
     map.setCenter(mapdict[id].position);
 }
 
-function showMatches(sim)
+function clearTable()
 {
     var tbl = get('tblMatches');
     while(tbl.rows.length>0)
         tbl.deleteRow(tbl.rows.length-1);
+    return tbl;
+}
 
+function showMatches(sim)
+{
+    var tbl = clearTable();
     var maxsimilarity = sorted[sorted.length-1].similarity;
     for(var i=0;i<sorted.length;i++)
     {
