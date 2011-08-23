@@ -2,32 +2,6 @@
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<style type="text/css">
-
-    html { height: 100% }
-    body { height: 100%; margin: 0; padding: 0 }
-  
-    .container 
-    { 
-        height: 100%;
-        width: 100%
-    }
-
-    .map_canvas 
-    { 
-        height: 100%
-    }
-
-    .sidebar 
-    {
-        margin-top: 1em;
-        width: 300px;
-        float: left;
-        height: 100%;
-        padding: 5px;
-    }
-</style>
-
     <script type="text/javascript" src="datadict.json"></script>
     <script type="text/javascript" src="distance.js"></script>
     <script type="text/javascript" src="ui.js"></script>
@@ -37,8 +11,7 @@
     <script type="text/javascript">
         google.load("visualization", "1", {packages:["corechart"]});
     </script>
-
-
+<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 
 <body onload="init()">
@@ -46,16 +19,16 @@
 
     <div id="work_area" class="sidebar">
       <div id="controls" style="display:none;">
-        <div>From:&nbsp;<span id="current_station"></span>&nbsp;
+        <div class="fromCity">City:&nbsp;<span id="current_station"></span>&nbsp;
         <button id="change_button" type="button" disabled="false" onclick="changeStation()">Change</button>
         </div>
 
-        <form action="single_slider_demo.html" method="get" name="demoForm">
-	      <table cellpadding="0" cellspacing="3">
+        <form action="single_slider_demo.html" method="get" name="demoForm">	
+        <table summary="Slider for cities" class="sliderStyle">
+			<tbody>
             <tr>
               <td>
-                <input name="sliderValue" id="sliderValue" type="Text" size="3"
-                       style="border: 1px solid gray;width:25px; height:16px; font-size: 10px;">
+                <input name="sliderValue" id="sliderValue" type="Text" size="3">
               </td>
               <td>
                 %
@@ -91,14 +64,37 @@
                 </script>
                 </td>
             </tr>
-            </table>
-        <table id="tblMatches" border="1">
+			</tbody>
+            </table>	
+			
+<div id="itsthetable">						
+        <table id="tblMatches" summary="Cities with the same climate">
+			<caption>Cities with the same climate</caption>
+			<thead>
+			<tr>
+				<th scope="col">City</th>
+				<th scope="col">Country</th>
+				<th scope="col">Distance</th>
+				<th scope="col" class="right_align">%</th>		
+			</tr>
+			</thead>
         </table>
-        </form>
-      </div> 
+        <table summary="total">
+			<tfoot>
+			<tr>
+				<th scope="row">Total</th>
+				<td colspan="3">7 cities</td>
+			</tr>
+			</tfoot>
+		</table>					
+</div>		
+    <div class="copyright">
+	Copyright <a href="http://www.codeminders.com">Codeminders</a>, &copy; 2004-2011 	
+	</div>
+        </form>			
+      </div> 	  
     </div> 
     <div id="map_canvas" class="map_canvas"></div>
-    
-    </div>
+    </div>	
 </body>
 </html>

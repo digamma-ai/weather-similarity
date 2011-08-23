@@ -237,7 +237,7 @@ function centerOnCity(id)
 function showMatches(sim)
 {
     var tbl = get('tblMatches');
-    while(tbl.rows.length>0)
+    while(tbl.rows.length>1) //so header line won't be deleted
         tbl.deleteRow(tbl.rows.length-1);
     
     var maxsimilarity = sorted[sorted.length-1].similarity;

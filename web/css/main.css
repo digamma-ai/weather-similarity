@@ -1,0 +1,150 @@
+/* roScripts
+Table Design by Mihalcea Romeo
+www.roscripts.com
+----------------------------------------------- */
+table { 
+		border-collapse:collapse;
+		background:#EFF4FB url(teaser.gif) repeat-x;
+		border-left:1px solid #686868;
+		border-right:1px solid #686868;
+		font:0.8em/145% 'Trebuchet MS',helvetica,arial,verdana;
+		color: #333;
+	}
+#itsthetable > table {width:100%;}
+#itsthetable {
+	height:610px;
+	overflow:auto;
+	background:#EFF4FB; 
+	padding-bottom:3px;
+	}
+	
+caption {
+		padding: 0.5em 0 0.5em 0;
+		text-align: left;
+		font-size: 1.4em;
+		font-weight: bold;
+		text-transform: uppercase;
+		color: #336699;
+		background: transparent;
+}
+	
+tbody tr th, tbody tr td  {
+	vertical-align:top;
+	padding-left:2px; 
+	padding-right:3px; 	
+	}
+tr th + td + td + td + td {
+	padding-left:5px;
+	} 
+tr.odd th + td + td + td + td {
+	font-size:0.9em; 
+	background:none;
+	} 
+	
+/* =links
+----------------------------------------------- */
+
+table a {
+		color:#950000;
+		text-decoration:none;
+}
+
+table a:link {}
+
+table a:visited {
+		font-weight:normal;
+		color:#666;
+		text-decoration: line-through;
+}
+
+table a:hover { border-bottom: 1px dashed #666;}
+
+/* =head =foot
+----------------------------------------------- */
+
+thead th, tfoot th, tfoot td {
+		background:#333 url(llsh.gif) repeat-x;
+		color:#fff;
+		text-align:left;
+		padding-right:1em;		
+}
+
+tfoot td {
+		text-align:right;
+		padding-right:1em;
+}
+
+/* =body
+----------------------------------------------- */
+
+th, td {border-bottom: dotted 1px #333;}
+th {white-space: nowrap;}
+th a {color:#333;}
+tr:hover {background:#fafafa;}
+
+/* =sliderStyle
+----------------------------------------------- */
+.sliderStyle, .sliderStyle:hover, .sliderStyle tbody th, .sliderStyle tbody td
+{
+	background:none;
+	border:0; 
+	margin:0 0 1em 0;
+	vertical-align:middle;									
+}
+	
+.sliderStyle input
+{
+	border: 1px solid gray;
+	width:25px; 
+	height:16px; 
+	font-size: 10px;
+	text-align:right;
+}
+
+html { height: 100%; }
+body { height: 100%; margin: 0; padding: 0; }
+
+.container 
+{ 
+	height: 100%;
+	width: 100%;
+}
+
+.map_canvas 
+{ 
+	height: 100%;
+}
+
+.sidebar 
+{
+	width: 360px;
+	float: left;
+	height: 100%;
+	padding: 5px;
+	background:#EFF4FB;
+}
+
+.fromCity {
+	margin:1em 0 0 0;
+	color:#333;
+}
+
+a:link, a:visited
+{
+    text-decoration: none; 
+	color:#950000;
+} 
+
+a:hover { border-bottom: 1px dashed #950000;}
+
+.right_align
+{
+	text-align:right;
+}
+
+.copyright
+{
+	text-align:center;
+	padding:1em 0 0 0;	
+	border-top:	1px solid #666;
+}
