@@ -31,32 +31,28 @@ Array.prototype.contains = function(obj)
     return false;
 }
 
+function iconUrl(zoomLevel, fname)
+{
+    if(zoomLevel<=2)
+        return null;
+    else if(zoomLevel<=6)
+        return "img/"+fname;
+    else
+        return BASE_G_ICON_URL+fname;
+}
+
 function zoom_changed()
 {
     var zoomLevel = map.getZoom();
     for(var i in mapdict)
     {
         var x = mapdict[i];
-        if(zoomLevel<=2)
-        {
-            //TODO: do not show markers at all
-        } else if(zoomLevel<=6)
-        {
-            if(mode = SELECT_MODE)
-                x.Marker.setIcon("img/RedDot.png");
-            else if(i==current_station_id)
-                x.Marker.setIcon("img/YellowDot.png");
-            else
-                x.Marker.setIcon("img/GreenDot.png");
-        } else
-        {
-            if(mode = SELECT_MODE)
-                x.Marker.setIcon(BASE_G_ICON_URL+"red-dot.png");
-            else if(i==current_station_id)
-                x.Marker.setIcon(BASE_G_ICON_URL+"blue-dot.png");
-            else
-                x.Marker.setIcon(BASE_G_ICON_URL+"green-dot.png");
-        }
+        if(mode = SELECT_MODE)
+            x.Marker.setIcon(iconUrl(zoomLevel,"red-dot.png"));
+        else if(i==current_station_id)
+            x.Marker.setIcon(iconUrl(zoomLevel,"blue-dot.png"));
+        else
+            x.Marker.setIcon(iconUrl(zoomLevel,"green-dot.png"));
     }
 }
 
@@ -169,7 +165,7 @@ function selectStation(id)
     get("current_station").innerHTML = mapdict[current_station_id].Name + ", " + mapdict[current_station_id].Country;
     get("change_button").disabled = false;
     
-    mapdict[current_station_id].Marker.setIcon(BASE_G_ICON_URL+"blue-dot.png");
+    mapdict[current_station_id].Marker.setIcon(iconUrl(map.getZoom(),"blue-dot.png"));
     mapdict[current_station_id].Marker.setVisible(true);
 
     sorted = sortBySimilarity(current_station_id);
@@ -184,10 +180,11 @@ function showAllMarkers()
     if(infowindow != null)
         infowindow.close();
     
+    var zoomLevel = map.getZoom();
     for(var i in mapdict)
     {
         mapdict[i].Marker.setVisible(true);
-        mapdict[i].Marker.setIcon(BASE_G_ICON_URL+"red-dot.png");
+        mapdict[i].Marker.setIcon(iconUrl(zoomLevel,"red-dot.png"));
     }
 }
 
@@ -202,12 +199,14 @@ function hideDissimilarMarkers(simp)
         sim = minsimilarity;
     else
         sim = minsimilarity + ((maxsimilarity - minsimilarity)/100)*simp;
+
+    var zoomLevel = map.getZoom();
     var n=0;
     for(var i=0;i<sorted.length;i++)
     {
         var x=sorted[i];
         if(x.similarity <= sim) {
-            x.Marker.setIcon(BASE_G_ICON_URL+"green-dot.png");
+            x.Marker.setIcon(iconUrl(zoomLevel,"green-dot.png"));
             x.Marker.setVisible(true);
             n++;
         } else
