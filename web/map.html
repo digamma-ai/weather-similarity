@@ -22,14 +22,15 @@
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </div>
       <div id="controls" style="display:none;">
-        <div class="fromCity">City:&nbsp;<span id="current_station"></span>&nbsp;
+		<span class="caption">Home City</span>
+        <div class="fromCity"><span id="current_station"></span>&nbsp;
         <button id="change_button" type="button" onclick="changeStation()">Change</button>
         </div>
 
         <form action="single_slider_demo.html" method="get" name="demoForm">	
         <table summary="Slider for cities" class="sliderStyle" style="text-align:left;width:100%">
             <thead>
-			<caption nowrap="true">Cities with the same climate</caption>
+			<caption>Cities with the similar climate</caption>
 			</thead>
 			<tbody>
             <tr>
@@ -71,7 +72,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
             </table>	
 			
 <div id="itsthetable">						
-        <table id="tblMatches" summary="Cities with the same climate">
+        <table id="tblMatches" summary="Cities with the similar climate">
 			<thead>
 			<tr>
 				<th scope="col">City</th>
@@ -90,11 +91,11 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 			</tfoot>
 		</table>					
 </div>		
+        </form>			
+      </div> 	  
     <div class="copyright">
 	Copyright <a href="http://www.codeminders.com">Codeminders</a>, &copy; 2004-2011 	
 	</div>
-        </form>			
-      </div> 	  
     </div> 
     <div id="map_canvas" class="map_canvas"></div>
     </div>	
