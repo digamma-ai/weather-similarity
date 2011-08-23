@@ -167,11 +167,11 @@ function selectStation(id)
     current_station.Marker.setVisible(true);
 
     sorted = sortBySimilarity(current_station_id);
-    A_SLIDERS[0].f_setValue(0);
+    A_SLIDERS[0].f_setValue(30);
 
     map.setCenter(current_station.position);
 
-    hideDissimilarMarkers(0);
+    hideDissimilarMarkers(30);
     
     get("help").style.display="none";
     get("intro").style.display="none";
