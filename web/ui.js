@@ -32,9 +32,7 @@ Array.prototype.contains = function(obj)
 
 function iconUrl(zoomLevel, fname)
 {
-    if(zoomLevel<=2)
-        return null;
-    else if(zoomLevel<=6)
+    if(zoomLevel<=6)
         return "img/"+fname;
     else
         return BASE_G_ICON_URL+fname;
