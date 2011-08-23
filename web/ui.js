@@ -2,9 +2,12 @@
 var SELECT_MODE = 0;
 var SHOW_MODE   = 1;
 
+var BASE_G_ICON_URL="http://www.google.com/intl/en_us/mapfiles/ms/micons/";
+
 var mode = SELECT_MODE;
 var map = null;
 var current_station = null;
+var current_station_id;
 var infowindow = null;
 var sorted = null;
 var infowindow = null;
@@ -31,7 +34,30 @@ Array.prototype.contains = function(obj)
 function zoom_changed()
 {
     var zoomLevel = map.getZoom();
-    // less 6, show small
+    for(var i in mapdict)
+    {
+        var x = mapdict[i];
+        if(zoomLevel<=2)
+        {
+            //TODO: do not show markers at all
+        } else if(zoomLevel<=6)
+        {
+            if(mode = SELECT_MODE)
+                x.Marker.setIcon("img/RedDot.png");
+            else if(i==current_station_id)
+                x.Marker.setIcon("img/YellowDot.png");
+            else
+                x.Marker.setIcon("img/GreenDot.png");
+        } else
+        {
+            if(mode = SELECT_MODE)
+                x.Marker.setIcon(BASE_G_ICON_URL+"red-dot.png");
+            else if(i==current_station_id)
+                x.Marker.setIcon(BASE_G_ICON_URL+"blue-dot.png");
+            else
+                x.Marker.setIcon(BASE_G_ICON_URL+"green-dot.png");
+        }
+    }
 }
 
 function init() 
@@ -143,7 +169,7 @@ function selectStation(id)
     get("current_station").innerHTML = mapdict[current_station_id].Name + ", " + mapdict[current_station_id].Country;
     get("change_button").disabled = false;
     
-    mapdict[current_station_id].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png");
+    mapdict[current_station_id].Marker.setIcon(BASE_G_ICON_URL+"blue-dot.png");
     mapdict[current_station_id].Marker.setVisible(true);
 
     sorted = sortBySimilarity(current_station_id);
@@ -161,7 +187,7 @@ function showAllMarkers()
     for(var i in mapdict)
     {
         mapdict[i].Marker.setVisible(true);
-        mapdict[i].Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png");
+        mapdict[i].Marker.setIcon(BASE_G_ICON_URL+"red-dot.png");
     }
 }
 
@@ -181,7 +207,7 @@ function hideDissimilarMarkers(simp)
     {
         var x=sorted[i];
         if(x.similarity <= sim) {
-            x.Marker.setIcon("http://www.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png");
+            x.Marker.setIcon(BASE_G_ICON_URL+"green-dot.png");
             x.Marker.setVisible(true);
             n++;
         } else
