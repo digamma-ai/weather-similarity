@@ -160,7 +160,11 @@ function selectStation(id)
 
     var current_station = mapdict[current_station_id];
 
-    get("current_station").innerHTML = current_station.Name + ", " + mapdict[current_station_id].Country;
+    get("current_station").innerHTML = 
+        '<a href="#" onclick="centerOnCity('+id+')">'+
+        current_station.Name + ", " + mapdict[current_station_id].Country+
+        "</a>";
+    
     get("change_button").disabled = false;
     
     current_station.Marker.setIcon(iconUrl(map.getZoom(),"blue-dot.png"));
