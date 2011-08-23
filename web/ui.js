@@ -227,6 +227,7 @@ function changeStation()
     mode = SELECT_MODE;
     get("current_station").innerHTML = "";
     get("controls").style.display="none";
+    get("intro").style.display="block";
     showAllMarkers();
 }
 
@@ -269,4 +270,20 @@ function showMatches(sim)
         
 
     }
+}
+
+function showHelp()
+{
+    get("controls").style.display="none";
+    get("intro").style.display="none";
+    get("help").style.display="block";
+}
+
+function closeHelp()
+{
+    get("help").style.display="none";
+    if(mode == SHOW_MODE)
+        get("controls").style.display="block";
+    else
+        get("intro").style.display="block";
 }
