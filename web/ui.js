@@ -6,7 +6,6 @@ var BASE_G_ICON_URL="http://www.google.com/intl/en_us/mapfiles/ms/micons/";
 
 var mode = SELECT_MODE;
 var map = null;
-var current_station = null;
 var current_station_id;
 var infowindow = null;
 var sorted = null;
@@ -114,8 +113,7 @@ function attachNumber(marker, x)
                 showChart(x.Number);
             });
         }
-        else
-        if(mode == SELECT_MODE)
+        else if(mode == SELECT_MODE)
         {
             selectStation(x.Number);
         }
@@ -148,9 +146,6 @@ function showChart(id)
         data.setValue(i, 2, t1[i]);    
     }
     
-    // Create and draw the visualization.
-    console.log(get('mrk'+id));
-    
     new google.visualization.ColumnChart(get('mrk'+id)).
     draw(data,
          {title:"Average Monthly Temperatures", 
@@ -161,15 +156,21 @@ function showChart(id)
 
 function selectStation(id)
 {
-    current_station_id = id; 
-    get("current_station").innerHTML = mapdict[current_station_id].Name + ", " + mapdict[current_station_id].Country;
+    current_station_id = id;
+
+    var current_station = mapdict[current_station_id];
+
+    get("current_station").innerHTML = current_station.Name + ", " + mapdict[current_station_id].Country;
     get("change_button").disabled = false;
     
-    mapdict[current_station_id].Marker.setIcon(iconUrl(map.getZoom(),"blue-dot.png"));
-    mapdict[current_station_id].Marker.setVisible(true);
+    current_station.Marker.setIcon(iconUrl(map.getZoom(),"blue-dot.png"));
+    current_station.Marker.setVisible(true);
 
     sorted = sortBySimilarity(current_station_id);
     A_SLIDERS[0].f_setValue(0);
+
+    map.setCenter(current_station.position);
+
     hideDissimilarMarkers(0);
     
     mode = SHOW_MODE;
