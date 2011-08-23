@@ -175,6 +175,7 @@ function selectStation(id)
 
     hideDissimilarMarkers(0);
     
+    get("intro").style.display="none";
     get("controls").style.display="block";
     mode = SHOW_MODE;
 }
