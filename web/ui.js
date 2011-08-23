@@ -28,6 +28,12 @@ Array.prototype.contains = function(obj)
     return false;
 }
 
+function zoom_changed()
+{
+    var zoomLevel = map.getZoom();
+    // less 6, show small
+}
+
 function init() 
 {      
     for(i in mapdict)
@@ -43,8 +49,8 @@ function init()
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     map = new google.maps.Map(document.getElementById("map_canvas"), options);
-    
     createMarkers();
+    google.maps.event.addListener(map, 'zoom_changed', zoom_changed);
 }
 
 function createMarkers()
@@ -194,7 +200,7 @@ function changeStation()
     showAllMarkers();
 }
 
-function zoomToCity(id)
+function centerOnCity(id)
 {
     map.setCenter(mapdict[id].position);
 }
@@ -216,7 +222,7 @@ function showMatches(sim)
         var c0 = row.insertCell(0);
         var lnk = document.createElement("a");
         lnk.setAttribute("href","#");
-        lnk.setAttribute("onclick","zoomToCity(\""+x.id+"\")");
+        lnk.setAttribute("onclick","centerOnCity(\""+x.id+"\")");
         lnk.appendChild(document.createTextNode(x.Name));
         c0.appendChild(lnk);
 
