@@ -148,7 +148,7 @@ function showChart(id)
     
     new google.visualization.ColumnChart(get('mrk'+id)).
     draw(data,
-         {title:"Average Monthly Temperatures", 
+         {title:"Average Monthly Temperatures (degree Celsius)",
           width:600, height:400,
           hAxis: {title: "Month"}}
   );
@@ -165,8 +165,6 @@ function selectStation(id)
         current_station.Name + ", " + mapdict[current_station_id].Country+
         "</a>";
     
-    get("change_button").disabled = false;
-    
     current_station.Marker.setIcon(iconUrl(map.getZoom(),"blue-dot.png"));
     current_station.Marker.setVisible(true);
 
@@ -177,6 +175,7 @@ function selectStation(id)
 
     hideDissimilarMarkers(0);
     
+    get("controls").style.display="block";
     mode = SHOW_MODE;
 }
 
@@ -225,9 +224,8 @@ function hideDissimilarMarkers(simp)
 function changeStation()
 {
     mode = SELECT_MODE;
-    get("change_button").disabled = true;
     get("current_station").innerHTML = "";
-    clearTable();
+    get("controls").style.display="none";
     showAllMarkers();
 }
 
@@ -236,17 +234,12 @@ function centerOnCity(id)
     map.setCenter(mapdict[id].position);
 }
 
-function clearTable()
+function showMatches(sim)
 {
     var tbl = get('tblMatches');
     while(tbl.rows.length>0)
         tbl.deleteRow(tbl.rows.length-1);
-    return tbl;
-}
-
-function showMatches(sim)
-{
-    var tbl = clearTable();
+    
     var maxsimilarity = sorted[sorted.length-1].similarity;
     for(var i=0;i<sorted.length;i++)
     {

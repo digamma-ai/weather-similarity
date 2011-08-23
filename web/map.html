@@ -45,6 +45,7 @@
     <div class="container">
 
     <div id="work_area" class="sidebar">
+      <div id="controls" style="display:none;">
         <div>From:&nbsp;<span id="current_station"></span>&nbsp;
         <button id="change_button" type="button" disabled="false" onclick="changeStation()">Change</button>
         </div>
@@ -91,9 +92,10 @@
                 </td>
             </tr>
             </table>
-        </form>
         <table id="tblMatches" border="1">
         </table>
+        </form>
+      </div> 
     </div> 
     <div id="map_canvas" class="map_canvas"></div>
     
