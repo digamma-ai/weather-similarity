@@ -175,7 +175,9 @@ function selectStation(id)
 
     hideDissimilarMarkers(0);
     
+    get("help").style.display="none";
     get("intro").style.display="none";
+    get("help_button").style.visibility="visible";
     get("controls").style.display="block";
     mode = SHOW_MODE;
 }
@@ -226,8 +228,11 @@ function changeStation()
 {
     mode = SELECT_MODE;
     get("current_station").innerHTML = "";
+    get("help").style.display="none";
     get("controls").style.display="none";
     get("intro").style.display="block";
+    get("help_button").style.visibility="hidden";
+    
     showAllMarkers();
 }
 
@@ -277,13 +282,20 @@ function showHelp()
     get("controls").style.display="none";
     get("intro").style.display="none";
     get("help").style.display="block";
+    get("help_button").style.visibility="hidden";
 }
 
 function closeHelp()
 {
     get("help").style.display="none";
     if(mode == SHOW_MODE)
+    {
         get("controls").style.display="block";
+        get("help_button").style.visibility="visible";
+    }
     else
+    {
         get("intro").style.display="block";
+        get("help_button").style.visibility="hidden";
+    }
 }

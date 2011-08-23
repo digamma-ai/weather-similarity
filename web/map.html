@@ -22,6 +22,7 @@
 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </div>
       <div id="help" style="display:none">
+<p>
 Help, I need somebody,
 Help, not just anybody,
 Help, you know I need someone,
@@ -41,16 +42,19 @@ And now my life has changed in oh so many ways,
 My independence seems to vanish in the haze.
 But every now and then I feel so insecure,
 I know that I just need you like, I've never done before.
+<p>
 
 Help me if you can, I'm feeling down
 And I do appreciate you being 'round.
 Help me get my feet back on the ground,
 Won't you please, please help me?
+<p>
 
 When I was younger, so much younger than today,
 I never needed anybody's help in anyway.
 But now these days are gone, I'm not so self assured,
 Now I find I've changed my mind, I've opened up the doors.
+<p>
 
 Help me if you can, I'm feeling down
 And i do appreciate you being 'round.
@@ -59,8 +63,11 @@ Won't you please, please help me?
 Help me,
 Help me,
 Ooooooo.
+<p>
         <br>
+        <div style="text-align:right">
         <button onclick="closeHelp()">Close</button>
+        </div>
       </div>
       <div id="controls" style="display:none;">
 		<span class="caption">Home City</span>
@@ -133,11 +140,11 @@ Ooooooo.
 			</tfoot>
 		</table>					
         
-</div>		
+</div>			
         </form>			
       </div> 	
     <div class="copyright">
-	Copyright <a href="http://www.codeminders.com">Codeminders</a>, &copy; 2004-2011&nbsp;&nbsp;&nbsp;<button type="button" onclick="showHelp()">Help</button>	
+	Copyright <a href="http://www.codeminders.com">Codeminders</a>, &copy; 2004-2011 &nbsp<button id="help_button" style="visibility:hidden" type="button" onclick="showHelp()">Help</button>
 	</div>
     </div> 
     <div id="map_canvas" class="map_canvas"></div>
