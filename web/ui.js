@@ -44,7 +44,7 @@ function zoom_changed()
     for(var i in mapdict)
     {
         var x = mapdict[i];
-        if(mode = SELECT_MODE)
+        if(mode == SELECT_MODE)
             x.Marker.setIcon(iconUrl(zoomLevel,"red-dot.png"));
         else if(i==current_station_id)
             x.Marker.setIcon(iconUrl(zoomLevel,"blue-dot.png"));
