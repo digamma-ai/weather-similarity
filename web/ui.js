@@ -303,6 +303,8 @@ function closeHelp()
 
 function shiftModeChanged()
 {
+    if(infowindow != null)
+        infowindow.close();
     shift_mode = get("shiftCheckBox").checked;
     selectStation(current_station_id, A_SLIDERS[0].n_value);
 }
