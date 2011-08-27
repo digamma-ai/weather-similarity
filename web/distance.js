@@ -1,5 +1,5 @@
 
-function weather_similarity(from, to)
+function euclidian_distance(from, to)
 {
     var i=0;
     var d=0;
@@ -8,7 +8,12 @@ function weather_similarity(from, to)
     return Math.sqrt(d);
 }
 
-function sortBySimilarity(from)
+function weather_similarity(from, to)
+{
+    return [euclidian_distance(from, to), 0]
+}
+
+function sortBySimilarity(from, do_shift)
 {
     var lst=[];
     var i;
@@ -20,7 +25,9 @@ function sortBySimilarity(from)
             continue; //skip self
         var x = mapdict[i];
         var t1 = x["Temps"];
-        x.similarity = weather_similarity(t0,t1);
+        var tmp = weather_similarity(t0,t1, do_shift);
+        x.similarity = tmp[0];
+        x.month_offset = tmp[1];
         x.dist = google.maps.geometry.spherical.computeDistanceBetween(x.position, p0);
         x.id = i;
         lst.push(x)

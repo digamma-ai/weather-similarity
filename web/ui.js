@@ -11,7 +11,6 @@ var infowindow = null;
 var sorted = null;
 var infowindow = null;
 var mode = SELECT_MODE;
-var shift_mode = false;
 
 function get(id)
 {
@@ -170,7 +169,7 @@ function selectStation(id, similarity)
     current_station.Marker.setIcon(iconUrl(map.getZoom(),"blue-dot.png"));
     current_station.Marker.setVisible(true);
 
-    sorted = sortBySimilarity(current_station_id);
+    sorted = sortBySimilarity(current_station_id, get("shiftCheckBox").checked);
     A_SLIDERS[0].f_setValue(similarity);
 
     map.setCenter(current_station.position);
@@ -305,6 +304,5 @@ function shiftModeChanged()
 {
     if(infowindow != null)
         infowindow.close();
-    shift_mode = get("shiftCheckBox").checked;
     selectStation(current_station_id, A_SLIDERS[0].n_value);
 }
