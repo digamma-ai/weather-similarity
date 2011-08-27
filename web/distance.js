@@ -1,4 +1,12 @@
 
+function array_shift_by(a,n)
+{
+    var res = a.slice(0)
+    while(n--)
+        res.push(res.shift());
+    return res;
+}
+
 function euclidian_distance(from, to)
 {
     var i=0;

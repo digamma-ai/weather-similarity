@@ -131,6 +131,14 @@ function showChart(id)
     var data = new google.visualization.DataTable();
     var monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
+    if(x1.month_offset>0)
+    {
+        var m1 = array_shift_by(monthNames,x1.month_offset);
+        for (var i = 0; i < 12; i++)
+            monthNames[i]=monthNames[i]+"/"+m1[i];
+        t1 = array_shift_by(x1.Temps, x1.month_offset);
+    }
+
     data.addColumn('string', 'Month');
     data.addColumn('number', n0);
     data.addColumn('number', n1);
