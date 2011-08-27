@@ -8,9 +8,25 @@ function euclidian_distance(from, to)
     return Math.sqrt(d);
 }
 
-function weather_similarity(from, to)
+function weather_similarity(from, to, do_shift)
 {
-    return [euclidian_distance(from, to), 0]
+    if(!do_shift)
+        return [euclidian_distance(from, to), 0]
+    
+    var md = euclidian_distance(from, to);
+    var mi = 0;
+    for(i=1;i<12;i++)
+    {
+        to.push(to.shift());
+        var d = euclidian_distance(from, to);
+        if(d<md)
+        {
+            md = d;
+            mi = i;
+        }
+    }
+    to.push(to.shift());
+    return [md, mi]
 }
 
 function sortBySimilarity(from, do_shift)
