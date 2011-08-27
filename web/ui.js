@@ -11,6 +11,7 @@ var infowindow = null;
 var sorted = null;
 var infowindow = null;
 var mode = SELECT_MODE;
+var shift_mode = false;
 
 function get(id)
 {
@@ -152,8 +153,11 @@ function showChart(id)
   );
 }
 
-function selectStation(id)
+function selectStation(id, similarity)
 {
+    if(similarity==null)
+        similarity = 30;
+
     current_station_id = id;
 
     var current_station = mapdict[current_station_id];
@@ -167,11 +171,10 @@ function selectStation(id)
     current_station.Marker.setVisible(true);
 
     sorted = sortBySimilarity(current_station_id);
-    A_SLIDERS[0].f_setValue(30);
+    A_SLIDERS[0].f_setValue(similarity);
 
     map.setCenter(current_station.position);
-
-    hideDissimilarMarkers(30);
+    hideDissimilarMarkers(similarity);
     
     get("help").style.display="none";
     get("intro").style.display="none";
@@ -296,4 +299,10 @@ function closeHelp()
         get("intro").style.display="block";
         get("help_button").style.visibility="hidden";
     }
+}
+
+function shiftModeChanged()
+{
+    shift_mode = get("shiftCheckBox").checked;
+    selectStation(current_station_id, A_SLIDERS[0].n_value);
 }
