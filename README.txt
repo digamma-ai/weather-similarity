@@ -1,4 +1,4 @@
-data sourc:
+Data source:
 
 http://www.metoffice.gov.uk/research/climate/climate-monitoring/land-and-atmosphere/surface-station-records
 
